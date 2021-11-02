@@ -2470,13 +2470,13 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: rgba(89,187,72);
+  border-color: rgba(89,187,72);
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #0069d9;
-  border-color: #0062cc;
+  background-color: rgb(54, 145, 38);
+  border-color: rgb(54, 145, 38);
 }
 .btn-primary:focus, .btn-primary.focus {
   color: #fff;
@@ -2530,8 +2530,8 @@ fieldset:disabled a.btn {
 
 .btn-success {
   color: #fff;
-  background-color: #28a745;
-  border-color: #28a745;
+  background-color: rgba(89,187,72);
+  border-color: rgba(89,187,72);
 }
 .btn-success:hover {
   color: #fff;
@@ -4627,8 +4627,8 @@ input[type=button].btn-block {
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: rgba(89,187,72);
+  border-color: rgba(89,187,72);
 }
 .page-item.disabled .page-link {
   color: #6c757d;
@@ -6164,7 +6164,7 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-  background-color: #343a40 !important;
+  background-color: #238276 !important;
 }
 
 a.bg-dark:hover, a.bg-dark:focus,
@@ -10204,11 +10204,11 @@ body {
 }
 
 .sb-sidenav-dark {
-  background-color: #212529;
-  color: rgba(255, 255, 255, 0.5);
+  background-color: #238276;
+  color: rgb(255, 255, 255);
 }
 .sb-sidenav-dark .sb-sidenav-menu .sb-sidenav-menu-heading {
-  color: rgba(240, 240, 240, 0.25);
+  color: rgb(240, 240, 240);
 }
 .sb-sidenav-dark .sb-sidenav-menu .nav-link {
   color: rgba(255, 255, 255, 0.5);
@@ -10229,7 +10229,7 @@ body {
   color: #fff;
 }
 .sb-sidenav-dark .sb-sidenav-footer {
-  background-color: #343a40;
+  background-color: #17695e;
 }
 
 .sb-sidenav-light {
