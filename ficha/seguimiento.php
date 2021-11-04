@@ -13,7 +13,7 @@
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="../index.php">Sena</a>
+        <a class="navbar-brand" href="../inicio.php">Sena</a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -101,17 +101,18 @@
 
         <div class="card-body">
             <div class="col-md-7">
-            <form action="recibe_excel_validando.php" method="POST" enctype="multipart/form-data"/>
-                <div class="file-input text-center">
-                    <input  type="file" name="dataCliente" id="file-input" class="file-input__input"/>
+            <form action="recibe_excel_validando.php" method="POST" enctype="multipart/form-data">
+                <div class="file-input text-center ">
+                    <input type="file" name="dataCliente" id="file-input" class="file-input__input"> 
                     <label class="file-input__label" for="file-input">
                     <i class="zmdi zmdi-upload zmdi-hc-2x"></i>
-                    <span>Elegir Archivo Excel</span></label
-                    >
+                    <span  class=" btn btn-primary">Elegir Archivo Excel</span>                                
+                    <input type="submit" name="subir" class="btn btn-primary" value="Subir Excel"/>
+
+                </label >
+
                 </div>
-            <div class="text-center mt-5">
-                <input type="submit" name="subir" class="btn-enviar" value="Subir Excel"/>
-            </div>
+            
             </form>
             </div>
 
