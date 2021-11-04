@@ -117,24 +117,30 @@
 
             <div class="col-md-5">
         <?php
-        header("Content-Type: text/html;charset=utf-8");
+        // header("Content-Type: text/html;charset=utf-8");
         include('config.php');
-        $sqlClientes = ("SELECT * FROM rap ORDER BY id ASC");
+        $sqlClientes = ("SELECT * FROM resultado_aprendizaje");
         $queryData   = mysqli_query($con, $sqlClientes);
         $total_client = mysqli_num_rows($queryData);
         ?>
 
             <h6 class="text-center">
-                Lista de Clientes <strong>(<?php echo $total_client; ?>)</strong>
+                Resultado de aprendizajes <strong>(<?php echo $total_client; ?>)</strong>
             </h6>
 
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped ">
                 <thead>
                     <tr>
                     <th>#</th>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Celular</th>
+                    <th>Fase</th>
+                    <th>Actividad de proyecto</th>
+                    <th>Competencia</th>
+                    <th>Resultado de <br> aprendizaje</th>
+                    <th>Tipo de <br> resultado</th>
+                    <th>Fecha inicio</th>
+                    <th>Fecha fin</th>
+                    <th>Estado de resultado</th>
+                    <th>Observaciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -143,9 +149,16 @@
                     while ($data = mysqli_fetch_array($queryData)) { ?>
                     <tr>
                     <th scope="row"><?php echo $i++; ?></th>
-                    <td><?php echo $data['nombre']; ?></td>
-                    <td><?php echo $data['correo']; ?></td>
-                    <td><?php echo $data['celular']; ?></td>
+                    <td><?php echo $data['fase']; ?></td>
+                    <td><?php echo $data['actividad']; ?></td>
+                    <td><?php echo $data['competencia']; ?></td>
+                    <td><?php echo $data['resultado']; ?></td>
+                    <td><?php echo $data['tipo']; ?></td>
+                    <td><?php echo $data['fecha_inicio']; ?></td>
+                    <td><?php echo $data['fecha_fin']; ?></td>
+                    <td><?php echo $data['estado']; ?></td>
+                    <td><?php echo $data['observaciones']; ?></td>
+
                     </tr>
                 <?php } ?>
                 </tbody>
@@ -158,3 +171,19 @@
 
     </div>
 </div>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="'js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(window).load(function() {
+            $(".cargando").fadeOut(1000);
+        });      
+});
+</script>
+
+</body>
+</html>
