@@ -8,6 +8,7 @@
     <meta name="author" content="" />
     <title>Registro usuario</title>
     <link href="../css/styles.css" rel="stylesheet" />
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
@@ -153,9 +154,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <p id=permisos >Permisos</p>
                             <div class="container">
+                                <div class="row row-cols-3">
                                 <input type="checkbox" name="permiso1"> Agregar usuario <br>
                                 <input type="checkbox" name="permiso2"> Agregar programa <br>
                                 <input type="checkbox" name="permiso3"> Agregar ficha <br>
@@ -170,9 +172,35 @@
                                 <input type="checkbox" name="permiso12"> Consultar ficha<br> 
                                 <input type="checkbox" name="permiso13"> Consultar rap <br> 
                                 <input type="checkbox" name="permiso15"> Agregar contenido rap<br>
+                                </div>
+                            </div>
+                            
+                        </div> -->
+                        <div class="form-group">
+                            <p id=permisos >Permisos</p>
+                            <div class="container">
+                                <div class="row row-cols-3">
+                                    <div class="col"><input type="checkbox"  name="permiso1"> Agregar usuario</div>
+                                    <div class="col"><input type="checkbox" name="permiso2"> Agregar programa</div>
+                                    <div class="col"><input type="checkbox" name="permiso3"> Agregar ficha</div>
+                                    <div class="col"><input type="checkbox" name="permiso1"> Subir Excel</div>
+                                    <div class="col"><input type="checkbox" name="permiso5"> Modificar usuario</div>
+                                    <div class="col"><input type="checkbox" name="permiso6"> Modificar ficha</div>
+                                    <div class="col"><input type="checkbox" name="permiso7"> Administrar ficha</div>
+                                    <div class="col"><input type="checkbox" name="permiso8"> Eliminar usuario</div>
+                                    <div class="col"><input type="checkbox" name="permiso9"> Eliminar ficha</div>
+                                    <div class="col"><input type="checkbox" name="permiso10"> Eliminar programa</div>
+                                    <div class="col"><input type="checkbox" name="permiso11"> Consultar usuario</div>
+                                    <div class="col"><input type="checkbox" name="permiso12"> Consultar ficha</div>
+                                    <div class="col"><input type="checkbox" name="permiso13"> Consultar rap</div>
+
+
+                                </div>
                             </div>
                             
                         </div>
+
+                        switch 
                         
                         
                         <input type="submit" class="btn btn-primary btn-block" value="Guardar">
@@ -192,5 +220,6 @@
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="../assets/demo/datatables-demo.js"></script>
+    
 </body>
 </html>

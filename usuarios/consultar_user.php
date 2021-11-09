@@ -176,31 +176,31 @@ $usuarios = "SELECT * FROM usuarios";
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="InsertarNombre">Nombres</label>
-                                                <input class="form-control py-4" name="nombre" id="nombre" type="text" placeholder="Ingrese nombres" />
+                                                <input class="form-control py-4" name="nombre" id="nombre" type="text" placeholder="Ingrese nombres" required/>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="InsertarApellido">Apellidos</label>
-                                                <input class="form-control py-4" name="apellido" id="apellido" type="text" placeholder="Ingrese apellidos" />
+                                                <input class="form-control py-4" name="apellido" id="apellido" type="text" placeholder="Ingrese apellidos" required/>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="small mb-1" for="InsertarUsuario">Usuario</label>
-                                        <input class="form-control py-4" name="usuario" id="usuario" type="text" aria-describedby="emailHelp" placeholder="Ingresar nombre de usuario" />
+                                        <input class="form-control py-4" name="usuario" id="usuario" type="text" aria-describedby="emailHelp" placeholder="Ingresar nombre de usuario" required />
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="InsertarContraseña">Contraseña</label>
-                                                <input class="form-control py-4" name="contraseña" id="contraseña" type="password" placeholder="Ingresar contraseña" />
+                                                <input class="form-control py-4" name="contraseña" id="contraseña" type="password" placeholder="Ingresar contraseña" required />
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="rol">Rol </label>
-                                                <select name="rol" class="form-control" name="rol" id="rol">
+                                                <select name="rol" class="form-control" name="rol" id="rol" required>
                                                     <option disabled>Seleccione un tipo de usuario</option>
                                                     <option value="1">administrador</option>
                                                     <option value="2">instructor</option>
@@ -211,13 +211,13 @@ $usuarios = "SELECT * FROM usuarios";
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="InsertarUsuario">Correo electronico</label>
-                                                <input class="form-control py-4" name="correo" id="correo" type="email" placeholder="Ingresar su correo electronico" />
+                                                <input class="form-control py-4" name="correo" id="correo" type="email" placeholder="Ingresar su correo electronico"required />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="InsertarUsuario">telefono</label>
-                                                <input class="form-control py-4" name="telefono" id="telefono" type="int" placeholder="Ingresar su correo electronico" />
+                                                <input class="form-control py-4" name="telefono" id="telefono" type="int" placeholder="Ingresar su correo electronico"required />
                                             </div>
 
                                             <input type="submit" class="btn btn-primary btn-block" value="Guardar">
