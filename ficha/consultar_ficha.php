@@ -301,6 +301,15 @@ if (isset($_GET["editar"])) {
 
             });
         </script>
+        <script>
+        $(document).ready(function() {
+    $('#dataTable').DataTable( {
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json"
+        }
+    } );
+} );
+    </script>
         </main>
 
 
@@ -311,7 +320,7 @@ if (isset($_GET["editar"])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="../assets/demo/chart-area-demo.js"></script>
     <script src="../assets/demo/chart-bar-demo.js"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script> -->
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="../assets/demo/datatables-demo.js"></script>
 </body>
