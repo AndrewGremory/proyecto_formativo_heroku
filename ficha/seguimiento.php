@@ -135,6 +135,7 @@ $ficha = $_POST['ficha'];
                     <?php
                         // header("Content-Type: text/html;charset=utf-8");
                         include('config.php');
+                        
                         $sqlClientes = ("SELECT * FROM resultado_aprendizaje where id = $ficha");
                         $queryData   = mysqli_query($con, $sqlClientes);
                         $total_client = mysqli_num_rows($queryData);
