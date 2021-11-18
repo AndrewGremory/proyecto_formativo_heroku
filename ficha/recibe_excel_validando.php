@@ -7,14 +7,19 @@ $lineas     = file($archivotmp);
 
 $i = 0;
 
+
+$id_ficha = $_POST['id'];
+
 foreach ($lineas as $linea) {
     $cantidad_registros = count($lineas);
     $cantidad_regist_agregados =  ($cantidad_registros - 1);
+    $id_ficha = $_POST['id'];
 
     if ($i != 0) {
-
+        
         $datos = explode(";", $linea);
-       
+
+
         $fase                = !empty($datos[0])  ? ($datos[0]) : '';
 		$actividad                = !empty($datos[1])  ? ($datos[1]) : '';
         $competencia               = !empty($datos[2])  ? ($datos[2]) : '';
@@ -26,7 +31,7 @@ foreach ($lineas as $linea) {
         $observaciones               = !empty($datos[8])  ? ($datos[8]) : '';
 
 if( !empty($resultado) ){
-    $checkemail_duplicidad = ("SELECT resultado FROM resultado_aprendizaje WHERE resultado='".($resultado)."' ");
+    $checkemail_duplicidad = ("SELECT * FROM resultado_aprendizaje WHERE resultado='".($resultado)."' ");
     // $checkemail_duplicidad = ("SELECT rap_resultado FROM rap WHERE rap_resultado='".($resultado)."' ");
 
             $ca_dupli = mysqli_query($con, $checkemail_duplicidad);
@@ -37,7 +42,8 @@ if( !empty($resultado) ){
 if ( $cant_duplicidad == 0 ) { 
 
 $insertarData = "INSERT INTO resultado_aprendizaje( 
-   fase,
+    id,
+    fase,
     actividad,
     competencia,
     resultado,
@@ -47,6 +53,7 @@ $insertarData = "INSERT INTO resultado_aprendizaje(
     estado,
     observaciones
 ) VALUES(
+    '$id_ficha',
     '$fase',
     '$actividad',
     '$competencia',
@@ -58,13 +65,14 @@ $insertarData = "INSERT INTO resultado_aprendizaje(
     '$observaciones'
 )";
 mysqli_query($con, $insertarData);
-header("Location: seguimiento.php");
+header("Location: consultar_ficha.php");
 
         
 } 
 /**Caso Contrario actualizo el o los Registros ya existentes*/
 else{
     $updateData =  ("UPDATE resultado_aprendizaje SET 
+        id ='" .$id_ficha. "',
         fase='" .$fase. "',
 		actividad='" .$actividad. "',
         competencia='" .$competencia. "'  
@@ -82,7 +90,7 @@ else{
 
  $i++;
 
- header("Location: seguimiento.php");
+ header("Location: consultar_ficha.php");
 
 }
 

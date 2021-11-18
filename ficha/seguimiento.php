@@ -1,4 +1,7 @@
-
+<?php include('config.php');
+$fichas = "SELECT * from fichas";
+$ficha = $_POST['ficha'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -98,7 +101,13 @@
         <div id="layoutSidenav_content">
                 <div class="container-fluid">
                     <h3 class="mt-4">
-                        Seguimiento de ficha
+                        Seguimiento de ficha 
+                        
+                        <?php 
+                            
+                            echo $ficha; ?>
+
+                        
                     </h3>
                     <hr>
                         
@@ -107,6 +116,7 @@
                                 <div class="col-md-7">
                                 <form action="recibe_excel_validando.php" method="POST" enctype="multipart/form-data">
                                     <div class="file-input text-center ">
+                                        <input type="hidden"  name="id" value="<?php echo $ficha; ?>">
                                         <input type="file" name="dataCliente" id="file-input" class="file-input__input"> 
                                         <label class="file-input__label" for="file-input">
                                         <i class="zmdi zmdi-upload zmdi-hc-2x"></i>
@@ -123,12 +133,12 @@
                         </div>
                     <div class="row">
                     <?php
-                                        // header("Content-Type: text/html;charset=utf-8");
-                                        include('config.php');
-                                        $sqlClientes = ("SELECT * FROM resultado_aprendizaje");
-                                        $queryData   = mysqli_query($con, $sqlClientes);
-                                        $total_client = mysqli_num_rows($queryData);
-                                        ?>
+                        // header("Content-Type: text/html;charset=utf-8");
+                        include('config.php');
+                        $sqlClientes = ("SELECT * FROM resultado_aprendizaje where id = $ficha");
+                        $queryData   = mysqli_query($con, $sqlClientes);
+                        $total_client = mysqli_num_rows($queryData);
+                        ?>
                                     
                     <h6 class="text-center">
                         Resultado de aprendizajes <strong>(<?php echo $total_client; ?>)</strong>

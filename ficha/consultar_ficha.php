@@ -147,13 +147,17 @@ if (isset($_GET["editar"])) {
                             while ($row = mysqli_fetch_assoc($resultado)) { ?>
                                 <tr>
 
-                                    <td><a href="seguimiento.php"><?php echo $row["id_ficha"]; ?></a></td>
+                                    <td><form action="seguimiento.php" method="post">
+                                        <input type="submit" id="ficha" class="btn btn-light" name="ficha" value="<?php echo $row['id_ficha']; ?> " /></td>
                                     <td><?php echo $row["tipo_programa"]; ?></td>
                                     <td><?php echo $row["pro_nombre"]; ?></td>
                                     <td><?php echo $row['lider']; ?></td>
                                     <td><button type="button" class="btn btn-success editbtn" data-toggle="modal" data-target="#editar"><i class="fas fa-edit"></i></button>
                                     <td><a href="consultar_ficha.php?eliminar=<?php echo $row['id_ficha']; ?>" class="btn btn-danger"><i class="fas fa-trash"></a></td>
-                                    <td><a href="seguimiento.php"><button type="button" class="btn btn-success">Administrar ficha</button></a></td>
+                                    
+                                    <td><form action="seguimiento.php"><button type="submit" id="ficha" class="btn btn-primary" name="ficha" value="<?php echo $row['id_ficha']; ?> ">Administrar ficha</button></form></td>
+                                    <!-- <td><label for="ficha" class="btn btn-primary">Administrar ficha</label></td> -->
+                                    <!-- <td><a href="seguimiento.php"><button type="button" class="btn btn-success">Administrar ficha</button></a></td> -->
 
                                 </tr>
                             <?php } ?>
