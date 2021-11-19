@@ -96,7 +96,7 @@ CREATE TABLE `fichas` (
 
 /*Data for the table `fichas` */
 
-insert  into `fichas`(`id_ficha`,`tipo_programa`,`nombre_programa`,`lider_ficha`) values (12313,'tecnico',1,6),(245646,'especializacion',2,4),(1231313,'tecnologo',1,5),(2435346,'tecnologo',2,7);
+insert  into `fichas`(`id_ficha`,`tipo_programa`,`nombre_programa`,`lider_ficha`) values (12313,'tecnico',1,6),(245646,'especializacion',2,4),(1231313,'tecnologo',1,5),(2068060,'tecnologo',1,4),(2435346,'tecnologo',2,7);
 
 /*Table structure for table `programa` */
 
@@ -106,11 +106,11 @@ CREATE TABLE `programa` (
   `id_programa` int(11) NOT NULL AUTO_INCREMENT,
   `pro_nombre` varchar(50) NOT NULL,
   PRIMARY KEY (`id_programa`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `programa` */
 
-insert  into `programa`(`id_programa`,`pro_nombre`) values (1,'Adsi'),(2,'Ingles');
+insert  into `programa`(`id_programa`,`pro_nombre`) values (1,'Adsi'),(2,'Ingles'),(8,'ganaderia');
 
 /*Table structure for table `regional` */
 
@@ -146,11 +146,11 @@ CREATE TABLE `resultado_aprendizaje` (
   `observaciones` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `resultado_aprendizaje_ibfk_1` FOREIGN KEY (`id`) REFERENCES `fichas` (`id_ficha`)
-) ENGINE=InnoDB AUTO_INCREMENT=2435347 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2435408 DEFAULT CHARSET=latin1;
 
 /*Data for the table `resultado_aprendizaje` */
 
-insert  into `resultado_aprendizaje`(`id`,`fase`,`actividad`,`competencia`,`resultado`,`tipo`,`fecha_inicio`,`fecha_fin`,`estado`,`observaciones`) values (12313,'INDUCCIÓN','IDENTIFICAR LOS LINEAMIENTOS INSTITUCIONALES RELACIONADOS CON LA FORMACIÒN PROFESIONAL INTEGRAL Y PRESENTACIÓN DEL PROYECTO FORMATIVO','PROMOVER LA INTERACCION IDONEA CONSIGO MISMO, CON LOS DEMAS Y CON LA NATURALEZA EN LOS CONTEXTOS LABORAL Y SOCIAL.','CONCERTAR ALTERNATIVAS Y ACCIONES DE FORMACIÓN PARA EL DESARROLLO DE LAS COMPETENCIAS DEL PROGRAMA FORMACIÓN, CON BASE EN LA POLÍTICA INSTITUCIONAL.','Institucional','0000-00-00','0000-00-00','Evaluado','José Montesino'),(2435346,'INDUCCIÓN','IDENTIFICAR LOS LINEAMIENTOS INSTITUCIONALES RELACIONADOS CON LA FORMACIÒN PROFESIONAL INTEGRAL Y PRESENTACIÓN DEL PROYECTO FORMATIVO','PROMOVER LA INTERACCION IDONEA CONSIGO MISMO, CON LOS DEMAS Y CON LA NATURALEZA EN LOS CONTEXTOS LABORAL Y SOCIAL.','ASUMIR LOS DEBERES Y DERECHOS CON BASE EN LAS LEYES Y LA NORMATIVA INSTITUCIONAL EN EL MARCO DE SU PROYECTO DE VIDA.','Institucional','0000-00-00','0000-00-00','Evaluado','José Montesino');
+insert  into `resultado_aprendizaje`(`id`,`fase`,`actividad`,`competencia`,`resultado`,`tipo`,`fecha_inicio`,`fecha_fin`,`estado`,`observaciones`) values (12313,'INDUCCIÓN','IDENTIFICAR LOS LINEAMIENTOS INSTITUCIONALES RELACIONADOS CON LA FORMACIÒN PROFESIONAL INTEGRAL Y PRESENTACIÓN DEL PROYECTO FORMATIVO','PROMOVER LA INTERACCION IDONEA CONSIGO MISMO, CON LOS DEMAS Y CON LA NATURALEZA EN LOS CONTEXTOS LABORAL Y SOCIAL.','CONCERTAR ALTERNATIVAS Y ACCIONES DE FORMACIÓN PARA EL DESARROLLO DE LAS COMPETENCIAS DEL PROGRAMA FORMACIÓN, CON BASE EN LA POLÍTICA INSTITUCIONAL.','Institucional','0000-00-00','0000-00-00','Evaluado','José Montesino'),(1231313,'INDUCCIÓN','IDENTIFICAR LOS LINEAMIENTOS INSTITUCIONALES RELACIONADOS CON LA FORMACIÒN PROFESIONAL INTEGRAL Y PRESENTACIÓN DEL PROYECTO FORMATIVO','PROMOVER LA INTERACCION IDONEA CONSIGO MISMO, CON LOS DEMAS Y CON LA NATURALEZA EN LOS CONTEXTOS LABORAL Y SOCIAL.','IDENTIFICAR LAS OPORTUNIDADES QUE EL SENA OFRECE EN EL MARCO DE LA FORMACIÓN PROFESIONAL DE ACUERDO CON EL CONTEXTO NACIONAL E INTERNACIONAL.','Institucional','0000-00-00','0000-00-00','Evaluado','José Montesino');
 
 /*Table structure for table `resultado_programa` */
 
