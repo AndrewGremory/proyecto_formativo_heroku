@@ -100,12 +100,13 @@ $ficha = $_POST['ficha'];
         </div>
         <div id="layoutSidenav_content">
                 <div class="container-fluid">
+                    <br>
+                    <div class="col"><a href="consultar_ficha.php" class="btn btn-outline-dark" role="button">Volver</a>
                     <h3 class="mt-4">
                         Seguimiento de ficha 
                         
-                        <?php 
-                            
-                            echo $ficha; ?>
+                        <?php echo $ficha; ?>
+</div>
 
                         
                     </h3>

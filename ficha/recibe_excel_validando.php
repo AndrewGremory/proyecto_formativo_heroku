@@ -16,12 +16,13 @@ foreach ($lineas as $linea) {
     $cantidad_regist_agregados =  ($cantidad_registros - 1);
 
     
+    
     if ($i != 0) {
         
         $datos = explode(";", $linea);
         
         
-        $ficha = ($id_ficha);
+
         $fase                = !empty($datos[0])  ? ($datos[0]) : '';
 		$actividad                = !empty($datos[1])  ? ($datos[1]) : '';
         $competencia               = !empty($datos[2])  ? ($datos[2]) : '';
@@ -56,7 +57,7 @@ $insertarData = "INSERT INTO resultado_aprendizaje(
     estado,
     observaciones
 ) VALUES(
-    '$ficha',
+    '$id_ficha',
     '$fase',
     '$actividad',
     '$competencia',
@@ -75,7 +76,7 @@ header("Location: consultar_ficha.php");
 /**Caso Contrario actualizo el o los Registros ya existentes*/
 else{
     $updateData =  ("UPDATE resultado_aprendizaje SET 
-        id ='" .$ficha. "',
+        id ='" .$id_ficha. "',
         fase='" .$fase. "',
 		actividad='" .$actividad. "',
         competencia='" .$competencia. "'  
