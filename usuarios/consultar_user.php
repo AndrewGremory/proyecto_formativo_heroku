@@ -101,6 +101,7 @@ $usuarios = "SELECT * FROM usuarios";
         </div>
         <div id="layoutSidenav_content">
             <div class="container">
+                <br>
                 <div class="table-responsive, d-flex">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
@@ -289,6 +290,18 @@ $usuarios = "SELECT * FROM usuarios";
 
             });
         </script>
+        <script>
+        $(document).ready(function() {
+                $('#dataTable').DataTable( {
+                    language: {
+                        "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json"
+                    }
+                    
+                });
+                
+            } );
+            
+            </script
 
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

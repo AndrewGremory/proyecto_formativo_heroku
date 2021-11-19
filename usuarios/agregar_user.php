@@ -199,10 +199,7 @@
                             </div>
                             
                         </div>
-
-                        switch 
-                        
-                        
+                                        
                         <input type="submit" class="btn btn-primary btn-block" value="Guardar">
                       
                     </form>

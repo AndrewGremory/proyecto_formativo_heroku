@@ -142,7 +142,7 @@ $ficha = $_POST['ficha'];
                         ?>
                                     
                     <h6 class="text-center">
-                        Resultado de aprendizajes <strong>(<?php echo $total_client; ?>)</strong>
+                        Resultados de aprendizaje <strong>(<?php echo $total_client; ?>)</strong>
                     </h6>
                             
                         <div class="table-responsive">
@@ -204,13 +204,31 @@ $ficha = $_POST['ficha'];
         
     <script>
         $(document).ready(function() {
-    $('#dataTable').DataTable( {
-        "language": {
-            "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json"
-        }
-    } );
-} );
+            var lenguaje = $('#dataTable').DataTable( {
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json" 
+                },
+                "createdRow":function(row,data,index){
+                    if (data[8] == "Evaluado"){
+                        // $(row).addClass( 'important');
+                        $('td', row).eq(7).css({
+                            'background-color':'#008000',
+                            'color':'white',
+                        })
+                    }
+                    if (data[8] == "Evaluado"){
+                        // $(row).addClass( 'important');
+                        $('td', row).eq(7).css({
+                            'background-color':'#008000',
+                            'color':'white',
+                        })
+                    }
+                }
+            } );
+            
+        } );
     </script>
+    
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
