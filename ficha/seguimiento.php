@@ -159,7 +159,8 @@ $ficha = $_POST['ficha'];
                                         <th>Fecha fin</th>
                                         <th>Estado de resultado</th>
                                         <th>Observaciones</th>
-        
+
+                                
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -174,6 +175,8 @@ $ficha = $_POST['ficha'];
                                         <th>Fecha fin</th>
                                         <th>Estado de resultado</th>
                                         <th>Observaciones</th>
+      
+
         
                                     </tr>
                                 </tfoot>
