@@ -1,6 +1,7 @@
 <?php include('config.php');
 $fichas = "SELECT * from fichas";
 $ficha = $_POST['ficha'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -99,6 +100,7 @@ $ficha = $_POST['ficha'];
             </nav>
         </div>
         <div id="layoutSidenav_content">
+            
                 <div class="container-fluid">
                     <br>
                     <div class="col"><a href="consultar_ficha.php" class="btn btn-outline-dark" role="button">Volver</a>
@@ -106,13 +108,11 @@ $ficha = $_POST['ficha'];
                         Seguimiento de ficha 
                         
                         <?php echo $ficha; ?>
-</div>
-
                         
+        </div>
                     </h3>
                     <hr>
-                        
-    
+                        <!-- SELECIONNAR EXCEL -->
                             <div class="card-body">
                                 <div class="col-md-7">
                                 <form action="recibe_excel_validando.php" method="POST" enctype="multipart/form-data">
@@ -121,7 +121,7 @@ $ficha = $_POST['ficha'];
                                         <input type="file" name="dataCliente" id="file-input" class="file-input__input"> 
                                         <label class="file-input__label" for="file-input">
                                         <i class="zmdi zmdi-upload zmdi-hc-2x"></i>
-                                        <span  class=" btn btn-primary">Elegir Archivo Excel</span>                                
+                                        <!-- <span  class=" btn btn-primary">Elegir Archivo Excel</span>                                 -->
                                         <input type="submit" name="subir" class="btn btn-primary" value="Subir Excel"/>
         
                                     </label >
@@ -132,6 +132,7 @@ $ficha = $_POST['ficha'];
                                 </div>
         
                         </div>
+                        
                     <div class="row">
                     <?php
                         // header("Content-Type: text/html;charset=utf-8");
@@ -144,6 +145,8 @@ $ficha = $_POST['ficha'];
                                     
                     <h6 class="text-center">
                         Resultados de aprendizaje <strong>(<?php echo $total_client; ?>)</strong>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Agregar_resultado">Agregar resultado de Aprendizaje</button>
+
                     </h6>
                             
                         <div class="table-responsive">
@@ -160,6 +163,7 @@ $ficha = $_POST['ficha'];
                                         <th>Fecha fin</th>
                                         <th>Estado de resultado</th>
                                         <th>Observaciones</th>
+                                        <th>Opciones</th>
 
                                 
                                     </tr>
@@ -176,6 +180,8 @@ $ficha = $_POST['ficha'];
                                         <th>Fecha fin</th>
                                         <th>Estado de resultado</th>
                                         <th>Observaciones</th>
+                                        <th>Opciones</th>
+
       
 
         
@@ -197,6 +203,9 @@ $ficha = $_POST['ficha'];
                                         <td><?php echo $data['fecha_fin']; ?></td>
                                         <td><?php echo $data['estado']; ?></td>
                                         <td><?php echo $data['observaciones']; ?></td>
+                                        <td> <button type="button" class="btn btn-success editbtn" data-toggle="modal" data-target="#editar"><i class="fas fa-edit"></i></button> <hr>
+                                        <button type="button" class="btn btn-danger deletebtn" data-toggle="modal" data-target="#eliminar"><i class="fas fa-trash"></i></button> </td>
+                                        <!-- <td> <button type="button" class="btn btn-danger deletebtn" data-toggle="modal" data-target="#eliminar"><i class="fas fa-trash"></i></button> </td> -->
         
                                         </tr>
                                     <?php } ?>
@@ -205,7 +214,201 @@ $ficha = $_POST['ficha'];
                         </div>
                     </div>
             </div>
-        
+            
+            
+            <!-- modal agregar resultado -->
+
+            <div class="modal fade bd-example-modal-lg" id="Agregar_resultado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Resultados de aprendizaje</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <!-- FORMULARIO -->
+                        <form>
+                            <div class="form-group">
+                                <label for="fase">Fase</label>
+                                <input type="text" class="form-control" name="fase" id="form_fase" placeholder="Ingrese fase" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="actividad">Actvidad de proyecto</label>
+                                <textarea class="form-control" id="form_actividad" placeholder="Ingrese Actividad de proyecto" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="competencia">Competencia</label>
+                                <textarea class="form-control" id="form_competencia" placeholder="Ingrese Competencia" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="resultado">Resultado de Aprendizaje</label>
+                                <textarea class="form-control" id="form_resultado" rows="3" placeholder="Ingrese Resultado de aprendizaje" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="form_tipo_resultado">Tipo de resultado</label>
+                                <select class="form-control" id="form_tipo_resultado">
+                                    <option selected disabled>Seleccione tipo de resultado</option>
+                                    <option>Específico</option>
+                                    <option>Institucional</option>
+                                    <option>Clave</option>
+                                    <option>Transversal</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="fecha_inicio">Fecha de inicio </label>
+                                <input type="date" class="form-control" id="form_fecha_inicio" placeholder="Fecha de inicio">
+                            </div>
+                            <div class="form-group">
+                                <label for="fecha_fin">Fecha de fin </label>
+                                <input type="date" class="form-control" id="form_fecha_fin" placeholder="Fecha de fin">
+                            </div>
+                            <div class="form-group">
+                                <label for="form_estado_resultado">Estado de resultado</label>
+                                <select name="estado" id="form_estado_resultado" class="form-control">
+                                    <option selected disabled>Seleccione tipo de resultado</option>
+                                    <option>Evaluado</option>
+                                    <option>Pendiente</option>
+                                    <option>En ejecución</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="observacion">Observaciones</label>
+                                <textarea name="observacion" id="form_observacion" class="form-control" placeholder="¿Alguna observacion?" rows="10"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Editar</button>
+                            </div>
+                            </form>
+                    </div>
+                    </div>
+                </div>
+            </div> 
+            <!-- modal editar -->
+            <div id="editar" class="modal fade bd-example-modal-lg"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- formulario -->
+                                <!-- FORMULARIO -->
+                                <form>
+                                    <div class="form-group">
+                                        <label for="fase">Fase</label>
+                                        <input type="text" class="form-control" name="fase" id="fase" placeholder="Ingrese fase" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="actividad">Actvidad de proyecto</label>
+                                        <textarea class="form-control" id="actividad" placeholder="Ingrese Actividad de proyecto" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="competencia">Competencia</label>
+                                        <textarea class="form-control" id="competencia" placeholder="Ingrese Competencia" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="resultado">Resultado de Aprendizaje</label>
+                                        <textarea class="form-control" id="resultado" rows="3" placeholder="Ingrese Resultado de aprendizaje" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tipo_resultado">Tipo de resultado</label>
+                                        <select class="form-control" id="tipo_resultado">
+                                            <option selected, disabled>Seleccione tipo de resultado</option>
+                                            <option>Específico</option>
+                                            <option>Institucional</option>
+                                            <option>Clave</option>
+                                            <option>Transversal</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fecha_inicio">Fecha de inicio </label>
+                                        <input type="date" class="form-control" id="fecha_inicio" placeholder="Fecha de inicio">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fecha_fin">Fecha de fin </label>
+                                        <input type="date" class="form-control" id="fecha_fin" placeholder="Fecha de fin">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="estado_resultado">Estado de resultado</label>
+                                        <select name="estado" id="estado_resultado" class="form-control">
+                                            <option selected, disabled>Seleccione tipo de resultado</option>
+                                            <option>Evaluado</option>
+                                            <option>Pendiente</option>
+                                            <option>En ejecución</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="observacion">Observaciones</label>
+                                        <textarea name="observacion" id="observacion" class="form-control" placeholder="¿Alguna observacion?" rows="10"></textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Editar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- modal eliminar -->
+            <div id="eliminar" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Eliminar Usuario</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- formulario -->
+                            <h4>¿Seguro de eliminar usuario?</h4>
+                            <form action="eliminar.php" id="formulario" role="form" method="POST">
+                                <input type="hidden" name="id" id="delete_id">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                    <button type="submit" class="btn btn-success">Eliminar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    <script>
+        $('.editbtn').on('click', function() {
+            $tr = $(this).closest('tr');
+            var datos = $tr.children("td").map(function() {
+                return $(this).text();
+            });
+            $('#fase').val(datos[0]);
+            $('#actividad').val(datos[1]);
+            $('#competencia').val(datos[2]);
+            $('#resultado').val(datos[3]);
+            $('#tipo_resultado').val(datos[4]);
+            $('#fecha_inicio').val(datos[5]);
+            $('#fecha_fin').val(datos[6]);
+            $('#estado_resultado').val(datos[7]);
+            $('#observacion').val(datos[8]);
+
+
+        });
+    </script>
     <script>
         $(document).ready(function() {
             var lenguaje = $('#dataTable').DataTable( {
@@ -220,7 +423,7 @@ $ficha = $_POST['ficha'];
                             'color':'white',
                         })
                     }
-                    if (data[8] == "Evaluado"){
+                    if (data[8] == "Pendiente"){
                         // $(row).addClass( 'important');
                         $('td', row).eq(7).css({
                             'background-color':'#008000',
