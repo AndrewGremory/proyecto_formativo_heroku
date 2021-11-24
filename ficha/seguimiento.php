@@ -1,6 +1,8 @@
 <?php include('config.php');
 $fichas = "SELECT * from fichas";
 $ficha = $_POST['ficha'];
+$ficha = $ficha;
+
 
 ?>
 <!DOCTYPE html>
@@ -106,7 +108,7 @@ $ficha = $_POST['ficha'];
                     <div class="col"><a href="consultar_ficha.php" class="btn btn-outline-dark" role="button">Volver</a>
                     <h3 class="mt-4">
                         Seguimiento de ficha 
-                        
+                    
                         <?php echo $ficha; ?>
                         
         </div>
@@ -117,7 +119,7 @@ $ficha = $_POST['ficha'];
                                 <div class="col-md-7">
                                 <form action="recibe_excel_validando.php" method="POST" enctype="multipart/form-data">
                                     <div class="file-input text-center ">
-                                        <input type="hidden"  name="id" value="<?php echo $ficha; ?>">
+                                        <input type="hidden"  name="ficha_id" value="<?php echo $ficha; ?>">
                                         <input type="file" name="dataCliente" id="file-input" class="file-input__input"> 
                                         <label class="file-input__label" for="file-input">
                                         <i class="zmdi zmdi-upload zmdi-hc-2x"></i>
@@ -138,7 +140,7 @@ $ficha = $_POST['ficha'];
                         // header("Content-Type: text/html;charset=utf-8");
                         include('config.php');
                         
-                        $sqlClientes = ("SELECT * FROM resultado_aprendizaje where id = $ficha");
+                        $sqlClientes = ("SELECT * FROM resultado_aprendizaje where ficha_id = '$ficha'");
                         $queryData   = mysqli_query($con, $sqlClientes);
                         $total_client = mysqli_num_rows($queryData);
                         ?>
@@ -230,26 +232,30 @@ $ficha = $_POST['ficha'];
                     <div class="modal-body">
 
                         <!-- FORMULARIO -->
-                        <form>
+                        <form action="insertar_resultado.php" method="POST" id="insertar_resultado">
+                            <div class="form-group">
+                                <label for="id" class="alert alert-success"  >Ficha <?php echo $ficha; ?></label>
+                                <input type="hidden" id="id" name="idform" value="<?php echo $ficha; ?>" >
+                            </div>
                             <div class="form-group">
                                 <label for="fase">Fase</label>
-                                <input type="text" class="form-control" name="fase" id="form_fase" placeholder="Ingrese fase" required>
+                                <input type="text" class="form-control" name="form_fase" id="form_fase" placeholder="Ingrese fase" required>
                             </div>
                             <div class="form-group">
                                 <label for="actividad">Actvidad de proyecto</label>
-                                <textarea class="form-control" id="form_actividad" placeholder="Ingrese Actividad de proyecto" required></textarea>
+                                <textarea class="form-control" name="form_actividad" id="form_actividad" placeholder="Ingrese Actividad de proyecto" required></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="competencia">Competencia</label>
-                                <textarea class="form-control" id="form_competencia" placeholder="Ingrese Competencia" required></textarea>
+                                <textarea class="form-control" name="form_competencia" id="form_competencia" placeholder="Ingrese Competencia" required></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="resultado">Resultado de Aprendizaje</label>
-                                <textarea class="form-control" id="form_resultado" rows="3" placeholder="Ingrese Resultado de aprendizaje" required></textarea>
+                                <textarea class="form-control" name="form_resultado" id="form_resultado" rows="3" placeholder="Ingrese Resultado de aprendizaje" required></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="form_tipo_resultado">Tipo de resultado</label>
-                                <select class="form-control" id="form_tipo_resultado">
+                                <select class="form-control" name="form_tipo_resultado" id="form_tipo_resultado">
                                     <option selected disabled>Seleccione tipo de resultado</option>
                                     <option>Específico</option>
                                     <option>Institucional</option>
@@ -259,15 +265,15 @@ $ficha = $_POST['ficha'];
                             </div>
                             <div class="form-group">
                                 <label for="fecha_inicio">Fecha de inicio </label>
-                                <input type="date" class="form-control" id="form_fecha_inicio" placeholder="Fecha de inicio">
+                                <input type="date" class="form-control" name="form_fecha_inicio" id="form_fecha_inicio" placeholder="Fecha de inicio">
                             </div>
                             <div class="form-group">
                                 <label for="fecha_fin">Fecha de fin </label>
-                                <input type="date" class="form-control" id="form_fecha_fin" placeholder="Fecha de fin">
+                                <input type="date" class="form-control" name="form_fecha_fin" id="form_fecha_fin" placeholder="Fecha de fin">
                             </div>
                             <div class="form-group">
                                 <label for="form_estado_resultado">Estado de resultado</label>
-                                <select name="estado" id="form_estado_resultado" class="form-control">
+                                <select name="form_estado_resultado" id="form_estado_resultado" class="form-control">
                                     <option selected disabled>Seleccione tipo de resultado</option>
                                     <option>Evaluado</option>
                                     <option>Pendiente</option>
@@ -276,11 +282,11 @@ $ficha = $_POST['ficha'];
                             </div>
                             <div class="form-group">
                                 <label for="observacion">Observaciones</label>
-                                <textarea name="observacion" id="form_observacion" class="form-control" placeholder="¿Alguna observacion?" rows="10"></textarea>
+                                <textarea name="form_observacion" id="form_observacion" class="form-control" placeholder="¿Alguna observacion?" rows="10"></textarea>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Editar</button>
+                                <button type="submit" class="btn btn-primary">Agregar</button>
                             </div>
                             </form>
                     </div>
@@ -374,9 +380,9 @@ $ficha = $_POST['ficha'];
                         </div>
                         <div class="modal-body">
                             <!-- formulario -->
-                            <h4>¿Seguro de eliminar usuario?</h4>
-                            <form action="eliminar.php" id="formulario" role="form" method="POST">
-                                <input type="hidden" name="id" id="delete_id">
+                            <h4>¿Está seguro de eliminar este resultado de la ficha <?php echo $ficha; ?>?</h4>
+                            <form action="eliminar.php" id="modal_eliminar" role="form" method="POST">
+                                <input type="hidden" name="id" id="delete_id" value="<?php echo $ficha; ?>">
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                                     <button type="submit" class="btn btn-success">Eliminar</button>
@@ -409,6 +415,16 @@ $ficha = $_POST['ficha'];
 
         });
     </script>
+    <!-- <script>
+            $('.deletebtn').on('click', function() {
+                $tr = $(this).closest('tr');
+                var datos = $tr.children("td").map(function() {
+                    return $(this).text();
+                });
+                $('#delete_id').val(datos[0]);
+
+            });
+        </script> -->
     <script>
         $(document).ready(function() {
             var lenguaje = $('#dataTable').DataTable( {
@@ -426,7 +442,7 @@ $ficha = $_POST['ficha'];
                     if (data[8] == "Pendiente"){
                         // $(row).addClass( 'important');
                         $('td', row).eq(7).css({
-                            'background-color':'#008000',
+                            'background-color':'#FFAC33',
                             'color':'white',
                         })
                     }

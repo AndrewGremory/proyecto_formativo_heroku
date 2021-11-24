@@ -8,8 +8,7 @@ $lineas     = file($archivotmp);
 $i = 0;
 
 
-
-$id_ficha = $_POST['id'];
+$ficha = $_POST['ficha_id'];    
 
 foreach ($lineas as $linea) {
     $cantidad_registros = count($lineas);
@@ -46,7 +45,7 @@ if( !empty($resultado) ){
 if ( $cant_duplicidad == 0 ) { 
 
 $insertarData = "INSERT INTO resultado_aprendizaje( 
-    id,
+    ficha_id,
     fase,
     actividad,
     competencia,
@@ -57,7 +56,7 @@ $insertarData = "INSERT INTO resultado_aprendizaje(
     estado,
     observaciones
 ) VALUES(
-    '$id_ficha',
+    '$ficha',
     '$fase',
     '$actividad',
     '$competencia',
