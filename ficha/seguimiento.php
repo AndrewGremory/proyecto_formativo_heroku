@@ -166,7 +166,7 @@ $ficha = $ficha;
                                         <th>Estado de resultado</th>
                                         <th>Observaciones</th>
                                         <th>Opciones</th>
-
+                                        <th>id</th>
                                 
                                     </tr>
                                 </thead>
@@ -183,6 +183,7 @@ $ficha = $ficha;
                                         <th>Estado de resultado</th>
                                         <th>Observaciones</th>
                                         <th>Opciones</th>
+                                        <th >id</th>
 
       
 
@@ -206,8 +207,16 @@ $ficha = $ficha;
                                         <td><?php echo $data['estado']; ?></td>
                                         <td><?php echo $data['observaciones']; ?></td>
                                         <td> <button type="button" class="btn btn-success editbtn" data-toggle="modal" data-target="#editar"><i class="fas fa-edit"></i></button> <hr>
-                                        <button type="button" class="btn btn-danger deletebtn" data-toggle="modal" data-target="#eliminar"><i class="fas fa-trash"></i></button> </td>
+                                            <button type="button" class="btn btn-danger deletebtn" data-toggle="modal" data-target="#eliminar"><i class="fas fa-trash"></i></button> 
+                                            <!-- eliminar -->
+                                            <!-- <form action="eliminar.php" method="post">
+                                                <button type="submit" class="btn btn-secondary deletebtn" data-toggle="modal" name="numero" data-target="#eliminar"><i class="fas fa-trash"></i></button> 
+                                            </form> -->
+                                        
+                                            </td>
+                                        <form action="eliminar.php" method="POST"></form>
                                         <!-- <td> <button type="button" class="btn btn-danger deletebtn" data-toggle="modal" data-target="#eliminar"><i class="fas fa-trash"></i></button> </td> -->
+                                        <td ><?php echo $data['id']; ?></td>
         
                                         </tr>
                                     <?php } ?>
@@ -238,7 +247,7 @@ $ficha = $ficha;
                                 <input type="hidden" id="id" name="idform" value="<?php echo $ficha; ?>" >
                             </div>
                             <div class="form-group">
-                                <label for="fase">Fase</label>
+                                <label for="fase">Fase </label>
                                 <input type="text" class="form-control" name="form_fase" id="form_fase" placeholder="Ingrese fase" required>
                             </div>
                             <div class="form-group">
@@ -255,7 +264,7 @@ $ficha = $ficha;
                             </div>
                             <div class="form-group">
                                 <label for="form_tipo_resultado">Tipo de resultado</label>
-                                <select class="form-control" name="form_tipo_resultado" id="form_tipo_resultado">
+                                <select class="form-control" name="form_tipo_resultado" id="form_tipo_resultado" required>
                                     <option selected disabled>Seleccione tipo de resultado</option>
                                     <option>Específico</option>
                                     <option>Institucional</option>
@@ -273,7 +282,7 @@ $ficha = $ficha;
                             </div>
                             <div class="form-group">
                                 <label for="form_estado_resultado">Estado de resultado</label>
-                                <select name="form_estado_resultado" id="form_estado_resultado" class="form-control">
+                                <select name="form_estado_resultado" id="form_estado_resultado" class="form-control" required>
                                     <option selected disabled>Seleccione tipo de resultado</option>
                                     <option>Evaluado</option>
                                     <option>Pendiente</option>
@@ -380,9 +389,13 @@ $ficha = $ficha;
                         </div>
                         <div class="modal-body">
                             <!-- formulario -->
-                            <h4>¿Está seguro de eliminar este resultado de la ficha <?php echo $ficha; ?>?</h4>
+                            <h4>¿Está seguro de eliminar este resultado de la ficha  <?php echo $ficha; ?>?</h4>
                             <form action="eliminar.php" id="modal_eliminar" role="form" method="POST">
-                                <input type="hidden" name="id" id="delete_id" value="<?php echo $ficha; ?>">
+                                <input type="hidden" name="ficha" value="<?php echo $ficha; ?>">
+                                <input type="text" disabled name="resultado" id="delete_id">
+                                
+
+
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                                     <button type="submit" class="btn btn-success">Eliminar</button>
@@ -411,20 +424,22 @@ $ficha = $ficha;
             $('#fecha_fin').val(datos[6]);
             $('#estado_resultado').val(datos[7]);
             $('#observacion').val(datos[8]);
+            $('#id').val(datos[9]);
+
 
 
         });
     </script>
-    <!-- <script>
+    <script>
             $('.deletebtn').on('click', function() {
                 $tr = $(this).closest('tr');
                 var datos = $tr.children("td").map(function() {
                     return $(this).text();
                 });
-                $('#delete_id').val(datos[0]);
+                $('#delete_id').val(datos[3]);
 
             });
-        </script> -->
+        </script>
     <script>
         $(document).ready(function() {
             var lenguaje = $('#dataTable').DataTable( {
@@ -440,6 +455,13 @@ $ficha = $ficha;
                         })
                     }
                     if (data[8] == "Pendiente"){
+                        // $(row).addClass( 'important');
+                        $('td', row).eq(7).css({
+                            'background-color':'#FF3333',
+                            'color':'white',
+                        })
+                    }
+                    if (data[8] == "En ejecución"){
                         // $(row).addClass( 'important');
                         $('td', row).eq(7).css({
                             'background-color':'#FFAC33',

@@ -34,7 +34,7 @@ foreach ($lineas as $linea) {
 
 
 if( !empty($resultado) ){
-    $checkemail_duplicidad = ("SELECT * FROM resultado_aprendizaje WHERE resultado='".($resultado)."' ");
+    $checkemail_duplicidad = ("SELECT * FROM resultado_aprendizaje WHERE ficha_id='".($ficha)."' AND resultado='".($resultado)."' ");
     // $checkemail_duplicidad = ("SELECT rap_resultado FROM rap WHERE rap_resultado='".($resultado)."' ");
 
             $ca_dupli = mysqli_query($con, $checkemail_duplicidad);
@@ -85,7 +85,7 @@ else{
         fecha_fin='" .$fecha_fin. "'  
         estado='" .$estado. "'  
         observaciones='" .$observaciones. "'  
-        WHERE competencia='".$competencia."'
+        WHERE id='".$id_ficha."'
     ");
     $result_update = mysqli_query($con, $updateData);
     } 

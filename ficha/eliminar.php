@@ -1,7 +1,8 @@
 <?php
 include_once("config.php");
 
-$id =$_POST["id"];
+$id =$_POST["numero"];
+
 
 
 $registros = mysqli_query($con, "SELECT * FROM resultado_aprendizaje WHERE id='$id'") or die("Problemas en el select consulta".mysqli_error($con));
