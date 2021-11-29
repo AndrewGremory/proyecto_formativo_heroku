@@ -1,8 +1,9 @@
 <?php
 include("conexion2.php");
-$fichas = "SELECT id_ficha, tipo_programa, pro_nombre, concat(usuarios.nombre,' ',usuarios.apellido) as lider, lider_ficha FROM fichas join programa on nombre_programa=id_programa join usuarios on id_usuario=lider_ficha";
 
 include('funciones.php');
+
+$fichas = "SELECT id_ficha, tipo_programa, pro_nombre, concat(usuarios.nombre,' ',usuarios.apellido) as lider, lider_ficha FROM fichas join programa on nombre_programa=id_programa join usuarios on id_usuario=lider_ficha";
 $miconexion=conectar_bd('root','login');
 
 

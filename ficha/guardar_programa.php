@@ -2,6 +2,7 @@
 include('funciones.php');
 
     $nombre=$_POST['nombre'];
+    
 
 
     $miconexion=conectar_bd('', 'login');
@@ -9,7 +10,6 @@ include('funciones.php');
     if ($resultado)
         {
             echo 'Guardado exitoso';
-
         }
     mysqli_close($miconexion);
     header("Location: agregar_ficha.php");

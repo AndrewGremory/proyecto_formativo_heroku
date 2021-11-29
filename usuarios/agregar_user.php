@@ -178,7 +178,7 @@
                         </div> -->
                         <div class="form-group">
                             <p id=permisos >Permisos</p>
-                            <div class="container">
+                            <div  class="container">
                                 <div class="row row-cols-3">
                                     <div class="col"><label><input type="checkbox" name="p1" value="1"> Agregar usuario</label></div>
                                     <div class="col"><label><input type="checkbox" name="p2" value="1"> Agregar programa</label></div>
@@ -198,7 +198,7 @@
                             </div>
                             
                         </div>
-                                        
+                                       
                         <input type="submit" class="btn btn-primary btn-block" value="Guardar">
                       
                     </form>

@@ -1,7 +1,6 @@
 <?php include('config.php');
 $fichas = "SELECT * from fichas";
 $ficha = $_POST['ficha'];
-$ficha = $ficha;
 
 
 ?>
@@ -102,6 +101,13 @@ $ficha = $ficha;
             </nav>
         </div>
         <div id="layoutSidenav_content">
+        <?php
+                        include('config.php');
+                        
+                        $sqlClientes = ("SELECT * FROM resultado_aprendizaje where ficha_id = '$ficha'");
+                        $queryData   = mysqli_query($con, $sqlClientes);
+                        $total_client = mysqli_num_rows($queryData);
+                        ?>
             
                 <div class="container-fluid">
                     <br>
@@ -136,14 +142,13 @@ $ficha = $ficha;
                         </div>
                         
                     <div class="row">
-                    <?php
-                        // header("Content-Type: text/html;charset=utf-8");
+                    <!-- <?php
                         include('config.php');
                         
                         $sqlClientes = ("SELECT * FROM resultado_aprendizaje where ficha_id = '$ficha'");
                         $queryData   = mysqli_query($con, $sqlClientes);
                         $total_client = mysqli_num_rows($queryData);
-                        ?>
+                        ?> -->
                                     
                     <h6 class="text-center">
                         Resultados de aprendizaje <strong>(<?php echo $total_client; ?>)</strong>
@@ -166,7 +171,7 @@ $ficha = $ficha;
                                         <th>Estado de resultado</th>
                                         <th>Observaciones</th>
                                         <th>Opciones</th>
-                                        <th>id</th>
+                                        <th style="visibility:hidden;">id</th>
                                 
                                     </tr>
                                 </thead>
@@ -183,7 +188,7 @@ $ficha = $ficha;
                                         <th>Estado de resultado</th>
                                         <th>Observaciones</th>
                                         <th>Opciones</th>
-                                        <th >id</th>
+                                        <th style="visibility:hidden;">id</th>
 
       
 
@@ -216,7 +221,7 @@ $ficha = $ficha;
                                             </td>
                                         <form action="eliminar.php" method="POST"></form>
                                         <!-- <td> <button type="button" class="btn btn-danger deletebtn" data-toggle="modal" data-target="#eliminar"><i class="fas fa-trash"></i></button> </td> -->
-                                        <td ><?php echo $data['id']; ?></td>
+                                        <td style="visibility:hidden;" ><?php echo $data['id']; ?></td>
         
                                         </tr>
                                     <?php } ?>
@@ -307,7 +312,7 @@ $ficha = $ficha;
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Editar Resultado de la ficha <?php echo $ficha; ?></h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -315,40 +320,43 @@ $ficha = $ficha;
                             <div class="modal-body">
                                 <!-- formulario -->
                                 <!-- FORMULARIO -->
-                                <form>
+                                <form action="editar_seguimiento.php" method="post">
+                                    <div class="form-group" >
+                                        <input type="text" hidden name="id" id="update_id">
+                                    </div>
                                     <div class="form-group">
                                         <label for="fase">Fase</label>
                                         <input type="text" class="form-control" name="fase" id="fase" placeholder="Ingrese fase" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="actividad">Actvidad de proyecto</label>
-                                        <textarea class="form-control" id="actividad" placeholder="Ingrese Actividad de proyecto" required></textarea>
+                                        <textarea class="form-control" id="actividad" name="actividad" placeholder="Ingrese Actividad de proyecto" required></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="competencia">Competencia</label>
-                                        <textarea class="form-control" id="competencia" placeholder="Ingrese Competencia" required></textarea>
+                                        <textarea class="form-control" name="competencia" id="competencia" placeholder="Ingrese Competencia" required></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="resultado">Resultado de Aprendizaje</label>
-                                        <textarea class="form-control" id="resultado" rows="3" placeholder="Ingrese Resultado de aprendizaje" required></textarea>
+                                        <textarea class="form-control" name="resultado" id="resultado" rows="3" placeholder="Ingrese Resultado de aprendizaje" required></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="tipo_resultado">Tipo de resultado</label>
-                                        <select class="form-control" id="tipo_resultado">
+                                        <select class="form-control" name="tipo_resultado"  id="tipo_resultado">
                                             <option selected, disabled>Seleccione tipo de resultado</option>
-                                            <option>Específico</option>
-                                            <option>Institucional</option>
-                                            <option>Clave</option>
-                                            <option>Transversal</option>
+                                            <option value="Específico">Específico</option>
+                                            <option value="Institucional">Institucional</option>
+                                            <option value="Clave">Clave</option>
+                                            <option value="Transversal">Transversal</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="fecha_inicio">Fecha de inicio </label>
-                                        <input type="date" class="form-control" id="fecha_inicio" placeholder="Fecha de inicio">
+                                        <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" placeholder="Fecha de inicio">
                                     </div>
                                     <div class="form-group">
                                         <label for="fecha_fin">Fecha de fin </label>
-                                        <input type="date" class="form-control" id="fecha_fin" placeholder="Fecha de fin">
+                                        <input type="date" class="form-control" name="fecha_fin" id="fecha_fin" placeholder="Fecha de fin">
                                     </div>
                                     <div class="form-group">
                                         <label for="estado_resultado">Estado de resultado</label>
@@ -392,7 +400,8 @@ $ficha = $ficha;
                             <h4>¿Está seguro de eliminar este resultado de la ficha  <?php echo $ficha; ?>?</h4>
                             <form action="eliminar.php" id="modal_eliminar" role="form" method="POST">
                                 <input type="hidden" name="ficha" value="<?php echo $ficha; ?>">
-                                <input type="text" disabled name="resultado" id="delete_id">
+                                <textarea class="form-control" disabled name="resultado" id="delete_id" rows="5" ></textarea>
+                                <input type="text" hidden name="id" id="copy_id">
                                 
 
 
@@ -424,7 +433,7 @@ $ficha = $ficha;
             $('#fecha_fin').val(datos[6]);
             $('#estado_resultado').val(datos[7]);
             $('#observacion').val(datos[8]);
-            $('#id').val(datos[9]);
+            $('#update_id').val(datos[10]);
 
 
 
@@ -437,6 +446,8 @@ $ficha = $ficha;
                     return $(this).text();
                 });
                 $('#delete_id').val(datos[3]);
+                $('#copy_id').val(datos[10]);
+
 
             });
         </script>
