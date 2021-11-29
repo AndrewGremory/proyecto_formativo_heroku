@@ -180,19 +180,19 @@
                             <p id=permisos >Permisos</p>
                             <div  class="container">
                                 <div class="row row-cols-3">
-                                    <div class="col"><label><input type="checkbox" name="p1" value="1"> Agregar usuario</label></div>
-                                    <div class="col"><label><input type="checkbox" name="p2" value="1"> Agregar programa</label></div>
-                                    <div class="col"><label><input type="checkbox" name="p3" value="1"> Agregar ficha</label></div>
-                                    <div class="col"><label><input type="checkbox" name="p4" value="1"> Subir Excel</label></div>
-                                    <div class="col"><label><input type="checkbox" name="p5" value="1"> Modificar usuario</label></div>
-                                    <div class="col"><label><input type="checkbox" name="p6" value="1"> Modificar ficha</label></div>
-                                    <div class="col"><label><input type="checkbox" name="p7" value="1">Administrar ficha</label> </div>
-                                    <div class="col"><label><input type="checkbox" name="p8" value="1"> Eliminar usuario</label></div>
-                                    <div class="col"><label><input type="checkbox" name="p9" value="1"> Eliminar ficha</label></div>
-                                    <div class="col"><label><input type="checkbox" name="p10" value="1"> Eliminar programa</label></div>
-                                    <div class="col"><label><input type="checkbox" name="p11" value="1"> Consultar usuario</label></div>
-                                    <div class="col"><label><input type="checkbox" name="p12" value="1"> Consultar ficha</label></div>
-                                    <div class="col"><label><input type="checkbox" name="p13" value="1"> Consultar rap</label></div>
+                                    <div class="col"><label><input type="checkbox" name='per1' value="1"> Agregar usuario</label></div>
+                                    <div class="col"><label><input type="checkbox" name='per2' value="1"> Agregar programa</label></div>
+                                    <div class="col"><label><input type="checkbox" name='per3' value="1"> Agregar ficha</label></div>
+                                    <div class="col"><label><input type="checkbox" name='per4' value="1"> Subir Excel</label></div>
+                                    <div class="col"><label><input type="checkbox" name='per5' value="1"> Modificar usuario</label></div>
+                                    <div class="col"><label><input type="checkbox" name='per6' value="1"> Modificar ficha</label></div>
+                                    <div class="col"><label><input type="checkbox" name='per7' value="1">Administrar ficha</label> </div>
+                                    <div class="col"><label><input type="checkbox" name='per8' value="1"> Eliminar usuario</label></div>
+                                    <div class="col"><label><input type="checkbox" name='per9' value="1"> Eliminar ficha</label></div>
+                                    <div class="col"><label><input type="checkbox" name='per10' value="1"> Eliminar programa</label></div>
+                                    <div class="col"><label><input type="checkbox" name='per11' value="1"> Consultar usuario</label></div>
+                                    <div class="col"><label><input type="checkbox" name='per12' value="1"> Consultar ficha</label></div>
+                                    <div class="col"><label><input type="checkbox" name='per13' value="1"> Consultar rap</label></div>
 
                                 </div>
                             </div>
