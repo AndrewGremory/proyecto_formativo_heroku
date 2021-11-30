@@ -1,6 +1,7 @@
 <?php
 include("conexion.php");
 $usuarios = "SELECT * FROM usuarios";
+$vpermiso5 = "SELECT permiso5 FROM usuarios WHERE rol = 'instructor'";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -301,7 +302,7 @@ $usuarios = "SELECT * FROM usuarios";
                 
             } );
             
-            </script
+            </script>
 
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

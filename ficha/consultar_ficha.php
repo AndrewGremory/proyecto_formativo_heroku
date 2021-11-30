@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("conexion2.php");
 
 include('funciones.php');
@@ -8,15 +9,15 @@ $miconexion=conectar_bd('root','login');
 
 
 
-if (isset($_GET["eliminar"])) {
-    // eliminar registro
-    $conexion->query("DELETE FROM fichas WHERE id_ficha =" . $_GET["eliminar"]);
-}
+// if (isset($_GET["eliminar"])) {
+//     // eliminar registro
+//     $conexion->query("DELETE FROM fichas WHERE id_ficha =" . $_GET["eliminar"]);
+// }
 
-if (isset($_GET["editar"])) {
-    // editar registro
-    $conexion->query("UPDATE FROM fichas where id_ficha =" . $_GET["editar"]);
-}
+// if (isset($_GET["editar"])) {
+//     // editar registro
+//     $conexion->query("UPDATE FROM fichas where id_ficha =" . $_GET["editar"]);
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -146,16 +147,18 @@ if (isset($_GET["editar"])) {
                         <tbody>
                             <?php $resultado = mysqli_query($conexion, $fichas);
 
-                            while ($row = mysqli_fetch_assoc($resultado)) { ?>
+                            while ($row = mysqli_fetch_assoc($resultado)) { 
+                                $_SESSION ['ficha'] =$row['id_ficha'];
+                                ?>
                                 <tr>
 
-                                    <td><form action="seguimiento.php" method="post">
-                                        <input type="submit" id="ficha" class="btn btn-light" name="ficha" value="<?php echo $row['id_ficha']; ?> " /></td>
+                                    <td><?php echo $row['id_ficha'];?></td>
                                     <td><?php echo $row["tipo_programa"]; ?></td>
                                     <td><?php echo $row["pro_nombre"]; ?></td>
                                     <td><?php echo $row['lider']; ?></td>
                                     <td><button type="button" class="btn btn-success editbtn" data-toggle="modal" data-target="#editar"><i class="fas fa-edit"></i></button>
-                                    <td><a href="consultar_ficha.php?eliminar=<?php echo $row['id_ficha']; ?>" class="btn btn-danger"><i class="fas fa-trash"></a></td>
+                                    <td><button type="button" class="btn btn-danger deletebtn" data-toggle="modal" data-target="#eliminar"><i class="fas fa-trash"></i></button></td>
+                                    
                                     
                                     <td><form action="seguimiento.php"><button type="submit" id="ficha" class="btn btn-primary" name="ficha" value="<?php echo $row['id_ficha']; ?> ">Administrar ficha</button></form></td>
                                     <!-- <td><label for="ficha" class="btn btn-primary">Administrar ficha</label></td> -->
@@ -293,6 +296,35 @@ if (isset($_GET["editar"])) {
                             </div>
                         </div>
 
+                         <!-- modal eliminar -->
+            <div id="eliminar" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Eliminar ficha</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- formulario -->
+                            <h4>¿Está seguro de eliminar esta ficha?</h4>
+                            <form action="eliminar_ficha.php" id="modal_eliminar" role="form" method="POST">
+                                <label for="delete_id">Ficha que va a eliminar: </label>
+                                <input type="text" class="form-control"  name="ficha" id="delete_id" readonly="readonly"></input>
+
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                    <button type="submit" class="btn btn-success">Eliminar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         <script>
             $('.editbtn').on('click', function() {
                 $tr = $(this).closest('tr');
@@ -307,6 +339,20 @@ if (isset($_GET["editar"])) {
 
             });
         </script>
+
+        <script>
+            $('.deletebtn').on('click', function() {
+                $tr = $(this).closest('tr');
+                var datos = $tr.children("td").map(function() {
+                    return $(this).text();
+                });
+                $('#delete_id').val(datos[0]);
+                $('#copy_id').val(datos[10]);
+
+
+            });
+        </script>
+
         <script>
         $(document).ready(function() {
                 $('#dataTable').DataTable( {

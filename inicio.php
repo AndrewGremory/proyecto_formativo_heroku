@@ -2,6 +2,7 @@
     include('conexion2.php');
     $fichas = "SELECT id_ficha, tipo_programa, pro_nombre, concat(usuarios.nombre,' ',usuarios.apellido) as lider, lider_ficha from fichas join programa on nombre_programa=id_programa join usuarios on id_usuario=lider_ficha ";
 
+    session_start()
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -17,7 +17,7 @@
 
     if (mysqli_query($con, $resultado))
         {
-            header("Location: seguimiento.php");
+            header("Location: consultar_ficha.php");
         }
     else{
         echo "Error, no se encontraron los siguientes valores=:".$id, $fase, $actividad, $competencia, $resultado,$tipo_resultado,$fecha_inicio,$fecha_fin,$estado, $observacion. "<br>" .mysqli_error($con); 

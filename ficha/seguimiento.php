@@ -1,6 +1,9 @@
 <?php include('config.php');
-$fichas = "SELECT * from fichas";
-$ficha = $_POST['ficha'];
+session_start();
+
+$ficha= $_SESSION['ficha'];
+$consulta = "SELECT * FROM resultado_aprendizaje where ficha_id = '$ficha'";
+
 
 
 ?>
@@ -13,7 +16,7 @@ $ficha = $_POST['ficha'];
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Consulta ficha</title>
+    <title>Seguimiento</title>
     <link href="../css/styles.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
@@ -100,22 +103,14 @@ $ficha = $_POST['ficha'];
                 </div>
             </nav>
         </div>
-        <div id="layoutSidenav_content">
-        <?php
-                        include('config.php');
-                        
-                        $sqlClientes = ("SELECT * FROM resultado_aprendizaje where ficha_id = '$ficha'");
-                        $queryData   = mysqli_query($con, $sqlClientes);
-                        $total_client = mysqli_num_rows($queryData);
-                        ?>
-            
+        <div id="layoutSidenav_content">          
                 <div class="container-fluid">
                     <br>
                     <div class="col"><a href="consultar_ficha.php" class="btn btn-outline-dark" role="button">Volver</a>
                     <h3 class="mt-4">
-                        Seguimiento de ficha 
+                        Seguimiento de ficha  a
                     
-                        <?php echo $ficha; ?>
+                        <?php echo $_SESSION['ficha'] ?>
                         
         </div>
                     </h3>
@@ -142,14 +137,11 @@ $ficha = $_POST['ficha'];
                         </div>
                         
                     <div class="row">
-                    <!-- <?php
-                        include('config.php');
-                        
-                        $sqlClientes = ("SELECT * FROM resultado_aprendizaje where ficha_id = '$ficha'");
-                        $queryData   = mysqli_query($con, $sqlClientes);
+                        <?php
+                    
+                        $queryData   = mysqli_query($con, $consulta);
                         $total_client = mysqli_num_rows($queryData);
-                        ?> -->
-                                    
+                        ?>   
                     <h6 class="text-center">
                         Resultados de aprendizaje <strong>(<?php echo $total_client; ?>)</strong>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Agregar_resultado">Agregar resultado de Aprendizaje</button>
@@ -171,7 +163,7 @@ $ficha = $_POST['ficha'];
                                         <th>Estado de resultado</th>
                                         <th>Observaciones</th>
                                         <th>Opciones</th>
-                                        <th style="visibility:hidden;">id</th>
+                                        <th style="visibility:collapse; display: none; ">id</th>
                                 
                                     </tr>
                                 </thead>
@@ -188,7 +180,7 @@ $ficha = $_POST['ficha'];
                                         <th>Estado de resultado</th>
                                         <th>Observaciones</th>
                                         <th>Opciones</th>
-                                        <th style="visibility:hidden;">id</th>
+                                        <th style="visibility:collapse; display: none; ">id</th>
 
       
 
@@ -197,11 +189,11 @@ $ficha = $_POST['ficha'];
                                 </tfoot>
                                 <tbody>
                                     
-                                    <?php 
+                                    <tr>
+                                        <?php 
                                         $i = 1;
                                         while ($data = mysqli_fetch_array($queryData)) { ?>
-                                        <tr>
-                                        <th scope="row"><?php echo $i++; ?></th>
+                                        <th><?php  echo $i++;?></th>
                                         <td><?php echo $data['fase']; ?></td>
                                         <td><?php echo $data['actividad']; ?></td>
                                         <td><?php echo $data['competencia']; ?></td>
@@ -221,11 +213,11 @@ $ficha = $_POST['ficha'];
                                             </td>
                                         <form action="eliminar.php" method="POST"></form>
                                         <!-- <td> <button type="button" class="btn btn-danger deletebtn" data-toggle="modal" data-target="#eliminar"><i class="fas fa-trash"></i></button> </td> -->
-                                        <td style="visibility:hidden;" ><?php echo $data['id']; ?></td>
+                                        <td style="visibility:collapse; display: none; " ><?php echo $data['id']; ?></td>
+                                        </tr>   
         
-                                        </tr>
-                                    <?php } ?>
-                                </tbody>
+                                        <?php } ?>
+                                    </tbody>
                             </table>
                         </div>
                     </div>
