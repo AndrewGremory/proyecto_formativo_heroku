@@ -1,9 +1,11 @@
 <?php include('config.php');
 session_start();
 
-$ficha= $_SESSION['ficha'];
-$consulta = "SELECT * FROM resultado_aprendizaje where ficha_id = '$ficha'";
+$fichaconsulta= $_POST['ficha'];
+$consulta = "SELECT * FROM resultado_aprendizaje where ficha_id = '$fichaconsulta'";
 
+$queryData   = mysqli_query($con, $consulta);
+$total_client = mysqli_num_rows($queryData);
 
 
 ?>
@@ -110,7 +112,7 @@ $consulta = "SELECT * FROM resultado_aprendizaje where ficha_id = '$ficha'";
                     <h3 class="mt-4">
                         Seguimiento de ficha  a
                     
-                        <?php echo $_SESSION['ficha'] ?>
+                        <?php echo $fichaconsulta ?>
                         
         </div>
                     </h3>
@@ -120,7 +122,7 @@ $consulta = "SELECT * FROM resultado_aprendizaje where ficha_id = '$ficha'";
                                 <div class="col-md-7">
                                 <form action="recibe_excel_validando.php" method="POST" enctype="multipart/form-data">
                                     <div class="file-input text-center ">
-                                        <input type="hidden"  name="ficha_id" value="<?php echo $ficha; ?>">
+                                        <input type="hidden"  name="ficha_id" value="<?php echo $fichaconsulta; ?>">
                                         <input type="file" name="dataCliente" id="file-input" class="file-input__input"> 
                                         <label class="file-input__label" for="file-input">
                                         <i class="zmdi zmdi-upload zmdi-hc-2x"></i>
@@ -139,8 +141,7 @@ $consulta = "SELECT * FROM resultado_aprendizaje where ficha_id = '$ficha'";
                     <div class="row">
                         <?php
                     
-                        $queryData   = mysqli_query($con, $consulta);
-                        $total_client = mysqli_num_rows($queryData);
+
                         ?>   
                     <h6 class="text-center">
                         Resultados de aprendizaje <strong>(<?php echo $total_client; ?>)</strong>
@@ -241,7 +242,7 @@ $consulta = "SELECT * FROM resultado_aprendizaje where ficha_id = '$ficha'";
                         <form action="insertar_resultado.php" method="POST" id="insertar_resultado">
                             <div class="form-group">
                                 <label for="id" class="alert alert-success"  >Ficha <?php echo $ficha; ?></label>
-                                <input type="hidden" id="id" name="idform" value="<?php echo $ficha; ?>" >
+                                <input type="hidden" id="id" name="idform" value="<?php echo $fichaconsulta; ?>" >
                             </div>
                             <div class="form-group">
                                 <label for="fase">Fase </label>
@@ -304,7 +305,7 @@ $consulta = "SELECT * FROM resultado_aprendizaje where ficha_id = '$ficha'";
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Editar Resultado de la ficha <?php echo $ficha; ?></h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Editar Resultado de la ficha <?php echo $fichaconsulta; ?></h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -312,25 +313,28 @@ $consulta = "SELECT * FROM resultado_aprendizaje where ficha_id = '$ficha'";
                             <div class="modal-body">
                                 <!-- formulario -->
                                 <!-- FORMULARIO -->
-                                <form action="editar_seguimiento.php" method="post">
+                                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+                                    <div class="form-group">
+                                        <input type="text" hidden name="ficha" value="<?php echo $fichaconsulta; ?>">
+                                    </div>
                                     <div class="form-group" >
                                         <input type="text" hidden name="id" id="update_id">
                                     </div>
                                     <div class="form-group">
                                         <label for="fase">Fase</label>
-                                        <input type="text" class="form-control" name="fase" id="fase" placeholder="Ingrese fase" required>
+                                        <input type="text" class="form-control" name="fase" id="fase"  required>
                                     </div>
                                     <div class="form-group">
                                         <label for="actividad">Actvidad de proyecto</label>
-                                        <textarea class="form-control" id="actividad" name="actividad" placeholder="Ingrese Actividad de proyecto" required></textarea>
+                                        <textarea class="form-control" id="actividad" name="actividad"  required></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="competencia">Competencia</label>
-                                        <textarea class="form-control" name="competencia" id="competencia" placeholder="Ingrese Competencia" required></textarea>
+                                        <textarea class="form-control" name="competencia" id="competencia"  required></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="resultado">Resultado de Aprendizaje</label>
-                                        <textarea class="form-control" name="resultado" id="resultado" rows="3" placeholder="Ingrese Resultado de aprendizaje" required></textarea>
+                                        <textarea class="form-control" name="resultado" id="resultado" rows="3"  required></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="tipo_resultado">Tipo de resultado</label>
@@ -366,9 +370,38 @@ $consulta = "SELECT * FROM resultado_aprendizaje where ficha_id = '$ficha'";
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Editar</button>
+                                        <input type="submit" class="btn btn-primary" name="editar" value="Editar"></input>
                                     </div>
                                 </form>
+                                <?php 
+                                    
+                                    if(isset($_POST['editar'])){
+                                        $fase = $_POST['fase'];
+                                        $actividad = $_POST['actividad'];
+                                        $competencia = $_POST['competencia'];
+                                        $resultado = $_POST['resultado'];
+                                        $tipo_resultado = $_POST['tipo_resultado'];
+                                        $fecha_inicio = $_POST['fecha_inicio'];
+                                        $fecha_fin = $_POST['fecha_fin'];
+                                        $estado = $_POST['estado'];
+                                        $observacion = $_POST['observacion'];
+                                        $id = $_POST['id'];
+                                        $ficha = $_POST['ficha'];
+                                    
+                                        $registros = mysqli_query($con, "SELECT * FROM resultado_aprendizaje where id='$id'") or die("Problemas en el select consulta".mysqli_error($con));
+                                    
+                                        if($reg = mysqli_fetch_array($registros)){
+                                            $registros = mysqli_query($con, "UPDATE resultado_aprendizaje set fase ='$fase', actividad ='$actividad', competencia ='$competencia', resultado ='$resultado', tipo ='$tipo_resultado', fecha_inicio ='$fecha_inicio', fecha_fin ='$fecha_fin', estado ='$estado', observaciones ='$observacion' WHERE id ='$id'") or die ("Problemas en el update".mysqli_error($con));
+                                    
+                                            // echo "<script language='JavaScript'>alert('Grabacion Correcta');</script>"; 
+                                    
+                                            // header("Location: seguimiento.php");
+
+                                    
+                                        }else
+                                        echo "Error, no se actualizó resultado de aprendizaje";
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>

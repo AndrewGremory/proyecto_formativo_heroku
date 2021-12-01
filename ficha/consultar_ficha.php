@@ -148,11 +148,10 @@ $miconexion=conectar_bd('root','login');
                             <?php $resultado = mysqli_query($conexion, $fichas);
 
                             while ($row = mysqli_fetch_assoc($resultado)) { 
-                                $_SESSION ['ficha'] =$row['id_ficha'];
                                 ?>
                                 <tr>
 
-                                    <td><?php echo $row['id_ficha'];?></td>
+                                <td><form action="seguimiento.php" method="post"><input type="submit" collapse id="ficha" class="btn btn-light" name="ficha" value="<?php echo $row['id_ficha']; ?>"/></td>
                                     <td><?php echo $row["tipo_programa"]; ?></td>
                                     <td><?php echo $row["pro_nombre"]; ?></td>
                                     <td><?php echo $row['lider']; ?></td>
