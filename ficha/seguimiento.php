@@ -1,5 +1,4 @@
 <?php include('config.php');
-session_start();
 
 $fichaconsulta= $_POST['ficha'];
 $consulta = "SELECT * FROM resultado_aprendizaje where ficha_id = '$fichaconsulta'";
@@ -7,10 +6,87 @@ $consulta = "SELECT * FROM resultado_aprendizaje where ficha_id = '$fichaconsult
 $queryData   = mysqli_query($con, $consulta);
 $total_client = mysqli_num_rows($queryData);
 
+ 
+    if(isset($_POST['editar'])){
+        $fase = $_POST['fase'];
+        $actividad = $_POST['actividad'];
+        $competencia = $_POST['competencia'];
+        $resultado = $_POST['resultado'];
+        $tipo_resultado = $_POST['tipo_resultado'];
+        $fecha_inicio = $_POST['fecha_inicio'];
+        $fecha_fin = $_POST['fecha_fin'];
+        $estado = $_POST['estado'];
+        $observacion = $_POST['observacion'];
+        $id = $_POST['id'];
+        $ficha = $_POST['ficha'];
+
+        // $registros = mysqli_query($con, "SELECT * FROM resultado_aprendizaje where id='$id'") or die("Problemas en el select consulta".mysqli_error($con));
+
+        if($reg = mysqli_fetch_array($queryData)){
+            $registros = mysqli_query($con, "UPDATE resultado_aprendizaje set fase ='$fase', actividad ='$actividad', competencia ='$competencia', resultado ='$resultado', tipo ='$tipo_resultado', fecha_inicio ='$fecha_inicio', fecha_fin ='$fecha_fin', estado ='$estado', observaciones ='$observacion' WHERE id ='$id'") or die ("Problemas en el update".mysqli_error($con));
+
+            // echo "<script language='JavaScript'>alert('Grabacion Correcta');</script>"; 
+
+            header("Location:");
+
+
+        }else
+        echo "Error, no se actualizó resultado de aprendizaje";
+    }
+
+    if(isset($_POST['Eliminar'])){
+        $ficha =$_POST["ficha"];
+        $id =$_POST["id"];
+
+
+
+
+        // $registros = mysqli_query($con, "SELECT * FROM resultado_aprendizaje WHERE id='$id' and ficha_id ='$ficha'") or die("Problemas en el select consulta".mysqli_error($con));
+
+        if ($reg = mysqli_fetch_array($queryData)) {
+            mysqli_query($con, "DELETE FROM resultado_aprendizaje WHERE id='$id'") or die("Problemas eliminando registros".mysqli_error($con));    
+
+            header("Location:");
+
+            
+        }else{
+            echo "No existe la ficha".$id;
+
+        }
+        mysqli_close($con);
+
+    }
+
+    if(isset($_POST['agregar'])){
+        $ficha = $_POST['idform'];
+        $fase = $_POST['form_fase'];
+        $actividad = $_POST['form_actividad'];
+        $competencia = $_POST['form_competencia'];
+        $resultado = $_POST['form_resultado'];
+        $tipo_resultado = $_POST['form_tipo_resultado'];
+        $fecha_inicio = $_POST['form_fecha_inicio'];
+        $fecha_fin = $_POST['form_fecha_fin'];
+        $estado = $_POST['form_estado_resultado'];
+        $observacion = $_POST['form_observacion'];
+
+        // $resultado = "INSERT INTO resultado_aprendizaje (ficha_id, fase, actividad, competencia, resultado, tipo, fecha_inicio, fecha_fin, estado, observaciones) VALUES ('{$ficha}','{$fase}','{$actividad}','{$competencia}','{$resultado}','{$tipo_resultado}','{$fecha_inicio}','{$fecha_fin}','{$estado}','{$observacion}')";
+
+
+        if ($queryData)
+            {
+                $resultado = "INSERT INTO resultado_aprendizaje (ficha_id, fase, actividad, competencia, resultado, tipo, fecha_inicio, fecha_fin, estado, observaciones) VALUES ('{$ficha}','{$fase}','{$actividad}','{$competencia}','{$resultado}','{$tipo_resultado}','{$fecha_inicio}','{$fecha_fin}','{$estado}','{$observacion}')";
+            }
+        else{
+            echo "Error, no se encontraron los siguientes valores=:".$id, $fase, $actividad, $competencia, $resultado,$tipo_resultado,$fecha_inicio,$fecha_fin,$estado, $observacion. "<br>" .mysqli_error($con); 
+        }
+        mysqli_close($con);
+    }
+
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
+    
 
 <head>
     <meta charset="utf-8" />
@@ -239,9 +315,9 @@ $total_client = mysqli_num_rows($queryData);
                     <div class="modal-body">
 
                         <!-- FORMULARIO -->
-                        <form action="insertar_resultado.php" method="POST" id="insertar_resultado">
+                        <form action="" method="POST" id="insertar_resultado">
                             <div class="form-group">
-                                <label for="id" class="alert alert-success"  >Ficha <?php echo $ficha; ?></label>
+                                <label for="id" class="alert alert-success"  >Ficha <?php echo $fichaconsulta; ?></label>
                                 <input type="hidden" id="id" name="idform" value="<?php echo $fichaconsulta; ?>" >
                             </div>
                             <div class="form-group">
@@ -263,7 +339,7 @@ $total_client = mysqli_num_rows($queryData);
                             <div class="form-group">
                                 <label for="form_tipo_resultado">Tipo de resultado</label>
                                 <select class="form-control" name="form_tipo_resultado" id="form_tipo_resultado" required>
-                                    <option selected disabled>Seleccione tipo de resultado</option>
+                                    <option selected disabled value="">Seleccione tipo de resultado</option>
                                     <option>Específico</option>
                                     <option>Institucional</option>
                                     <option>Clave</option>
@@ -281,7 +357,7 @@ $total_client = mysqli_num_rows($queryData);
                             <div class="form-group">
                                 <label for="form_estado_resultado">Estado de resultado</label>
                                 <select name="form_estado_resultado" id="form_estado_resultado" class="form-control" required>
-                                    <option selected disabled>Seleccione tipo de resultado</option>
+                                    <option selected disabled value="">Seleccione tipo de resultado</option>
                                     <option>Evaluado</option>
                                     <option>Pendiente</option>
                                     <option>En ejecución</option>
@@ -293,13 +369,14 @@ $total_client = mysqli_num_rows($queryData);
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Agregar</button>
+                                <INPUT type="submit" class="btn btn-primary" name="agregar" VALUE="Agregar"></button>
                             </div>
                             </form>
                     </div>
                     </div>
                 </div>
             </div> 
+            
             <!-- modal editar -->
             <div id="editar" class="modal fade bd-example-modal-lg"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
@@ -373,35 +450,7 @@ $total_client = mysqli_num_rows($queryData);
                                         <input type="submit" class="btn btn-primary" name="editar" value="Editar"></input>
                                     </div>
                                 </form>
-                                <?php 
-                                    
-                                    if(isset($_POST['editar'])){
-                                        $fase = $_POST['fase'];
-                                        $actividad = $_POST['actividad'];
-                                        $competencia = $_POST['competencia'];
-                                        $resultado = $_POST['resultado'];
-                                        $tipo_resultado = $_POST['tipo_resultado'];
-                                        $fecha_inicio = $_POST['fecha_inicio'];
-                                        $fecha_fin = $_POST['fecha_fin'];
-                                        $estado = $_POST['estado'];
-                                        $observacion = $_POST['observacion'];
-                                        $id = $_POST['id'];
-                                        $ficha = $_POST['ficha'];
-                                    
-                                        $registros = mysqli_query($con, "SELECT * FROM resultado_aprendizaje where id='$id'") or die("Problemas en el select consulta".mysqli_error($con));
-                                    
-                                        if($reg = mysqli_fetch_array($registros)){
-                                            $registros = mysqli_query($con, "UPDATE resultado_aprendizaje set fase ='$fase', actividad ='$actividad', competencia ='$competencia', resultado ='$resultado', tipo ='$tipo_resultado', fecha_inicio ='$fecha_inicio', fecha_fin ='$fecha_fin', estado ='$estado', observaciones ='$observacion' WHERE id ='$id'") or die ("Problemas en el update".mysqli_error($con));
-                                    
-                                            // echo "<script language='JavaScript'>alert('Grabacion Correcta');</script>"; 
-                                    
-                                            // header("Location: seguimiento.php");
-
-                                    
-                                        }else
-                                        echo "Error, no se actualizó resultado de aprendizaje";
-                                    }
-                                ?>
+                                
                             </div>
                         </div>
                     </div>
@@ -422,9 +471,9 @@ $total_client = mysqli_num_rows($queryData);
                         </div>
                         <div class="modal-body">
                             <!-- formulario -->
-                            <h4>¿Está seguro de eliminar este resultado de la ficha  <?php echo $ficha; ?>?</h4>
-                            <form action="eliminar.php" id="modal_eliminar" role="form" method="POST">
-                                <input type="hidden" name="ficha" value="<?php echo $ficha; ?>">
+                            <h4>¿Está seguro de eliminar este resultado de la ficha  <?php echo $fichaconsulta; ?>?</h4>
+                            <form action="" id="modal_eliminar" role="form" method="POST">
+                                <input type="hidden" name="ficha" value="<?php echo $fichaconsulta ; ?>">
                                 <textarea class="form-control" disabled name="resultado" id="delete_id" rows="5" ></textarea>
                                 <input type="text" hidden name="id" id="copy_id">
                                 
@@ -432,7 +481,7 @@ $total_client = mysqli_num_rows($queryData);
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                    <button type="submit" class="btn btn-success">Eliminar</button>
+                                    <input type="submit" class="btn btn-success" name="Eliminar" value="Eliminar"></button>
                                 </div>
                             </form>
                         </div>
@@ -509,7 +558,10 @@ $total_client = mysqli_num_rows($queryData);
             
         } );
     </script>
-    
+
+    <script>
+        ("#")
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

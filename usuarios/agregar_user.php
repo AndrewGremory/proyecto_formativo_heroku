@@ -134,7 +134,7 @@
                             <div class="form-group">
                                 <label class="small mb-1" for="Rol">Rol </label>
                                 <select name="rol" class="form-control" name="Rol" required>
-                                    <option selected, disabled>Seleccione un tipo de usuario</option>
+                                    <option selected disabled value="">Seleccione un tipo de usuario</option>
                                     <option value="1">administrador</option>
                                     <option value="2">instructor</option>
                                     <option value="3">coordinador</option>

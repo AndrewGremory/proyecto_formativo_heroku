@@ -113,7 +113,7 @@
                                 <div class="form-group">
                                     <label class="small mb-1" for="TipoPrograma" >Tipo de programa</label>
                                     <select class="form-control" name="tipo_programa" id="TipoPrograma" required>
-                                        <option value="">Selecciona una opción</option>
+                                        <option selected disabled value="">Selecciona una opción</option>
                                         <option value="1">Especialización Tecnológica</option>
                                         <option value="2">Tecnólogo	</option>
                                         <option value="3">Técnico</option>
@@ -134,7 +134,7 @@
 
 
                                 <select class="form-control" name="nombre_programa" id="NombrePrograma" required>
-                                    <option value="">Selecciona una opción</option>
+                                    <option selected disabled value="">Selecciona una opción</option>
                                     <?php while ($opcion = $resultado -> fetch_object()) { ?>
 
                                 <option value="<?php echo $opcion -> id_programa;?>"><?php echo $opcion -> pro_nombre;?></option>
@@ -158,7 +158,7 @@
                                     
                                     ?>
                                     <select class="form-control" name="lider_ficha" id="LiderFicha" required>
-                                        <option value="">Seleccione un instructor</option>
+                                        <option selected disabled value="">Seleccione un instructor</option>
                                         <?php while ($opcion = $resultado -> fetch_object()) { ?>
 
                                         <option value=" <?php echo $opcion -> id_usuario;?>"><?php echo $opcion-> nombre." ".$opcion -> apellido;?></option>
