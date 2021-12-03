@@ -84,14 +84,11 @@ $vpermiso5 = "SELECT permiso5 FROM usuarios WHERE rol = 'instructor'";
 
                         <div class="sb-sidenav-menu-heading">Acceso rapido</div>
 
-                        <a class="nav-link" href="charts.html">
+                        <a class="nav-link" href="../estadisticas/index.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Estadisticas
                         </a>
-                        <a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Tablas
-                        </a>
+                       
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">

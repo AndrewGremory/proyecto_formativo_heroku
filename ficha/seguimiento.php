@@ -58,6 +58,8 @@ $total_client = mysqli_num_rows($queryData);
     }
 
     if(isset($_POST['agregar'])){
+        include ('config.php');
+
         $ficha = $_POST['idform'];
         $fase = $_POST['form_fase'];
         $actividad = $_POST['form_actividad'];
@@ -68,13 +70,15 @@ $total_client = mysqli_num_rows($queryData);
         $fecha_fin = $_POST['form_fecha_fin'];
         $estado = $_POST['form_estado_resultado'];
         $observacion = $_POST['form_observacion'];
-
-        // $resultado = "INSERT INTO resultado_aprendizaje (ficha_id, fase, actividad, competencia, resultado, tipo, fecha_inicio, fecha_fin, estado, observaciones) VALUES ('{$ficha}','{$fase}','{$actividad}','{$competencia}','{$resultado}','{$tipo_resultado}','{$fecha_inicio}','{$fecha_fin}','{$estado}','{$observacion}')";
-
-
-        if ($queryData)
+    
+        $resultado = "INSERT INTO resultado_aprendizaje (ficha_id, fase, actividad, competencia, resultado, tipo, fecha_inicio, fecha_fin, estado, observaciones) VALUES ('{$ficha}','{$fase}','{$actividad}','{$competencia}','{$resultado}','{$tipo_resultado}','{$fecha_inicio}','{$fecha_fin}','{$estado}','{$observacion}')";
+    
+    
+        if (mysqli_query($con, $resultado))
             {
-                $resultado = "INSERT INTO resultado_aprendizaje (ficha_id, fase, actividad, competencia, resultado, tipo, fecha_inicio, fecha_fin, estado, observaciones) VALUES ('{$ficha}','{$fase}','{$actividad}','{$competencia}','{$resultado}','{$tipo_resultado}','{$fecha_inicio}','{$fecha_fin}','{$estado}','{$observacion}')";
+                echo "<script language='JavaScript'>alert('Guardado exitoso');</script>"; 
+    
+                header("Location: consultar_ficha.php");
             }
         else{
             echo "Error, no se encontraron los siguientes valores=:".$id, $fase, $actividad, $competencia, $resultado,$tipo_resultado,$fecha_inicio,$fecha_fin,$estado, $observacion. "<br>" .mysqli_error($con); 
@@ -165,14 +169,11 @@ $total_client = mysqli_num_rows($queryData);
                         </div>
 
 
-                        <a class="nav-link" href="charts.html">
+                        <a class="nav-link" href="../estadisticas/index.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Estadisticas
                         </a>
-                        <a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Tablas
-                        </a>
+                       
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
@@ -222,7 +223,7 @@ $total_client = mysqli_num_rows($queryData);
                     <h6 class="text-center">
                         Resultados de aprendizaje <strong>(<?php echo $total_client; ?>)</strong>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Agregar_resultado">Agregar resultado de Aprendizaje</button>
-
+                        <a class="btn btn-primary" href="../estadisticas/index.php">Estadisticas</a>
                     </h6>
                             
                         <div class="table-responsive">
@@ -360,8 +361,7 @@ $total_client = mysqli_num_rows($queryData);
                                     <option selected disabled value="">Seleccione tipo de resultado</option>
                                     <option>Evaluado</option>
                                     <option>Pendiente</option>
-                                    <option>En ejecución</option>
-                                </select>
+                                    <option>En ejecución</option>                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="observacion">Observaciones</label>
@@ -369,7 +369,7 @@ $total_client = mysqli_num_rows($queryData);
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <INPUT type="submit" class="btn btn-primary" name="agregar" VALUE="Agregar"></button>
+                                <INPUT type="submit" class="btn btn-primary" name="agregar" id="btn_agregar" VALUE="Agregar" ></button>
                             </div>
                             </form>
                     </div>
@@ -390,7 +390,7 @@ $total_client = mysqli_num_rows($queryData);
                             <div class="modal-body">
                                 <!-- formulario -->
                                 <!-- FORMULARIO -->
-                                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+                                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="actualizar" method="post">
                                     <div class="form-group">
                                         <input type="text" hidden name="ficha" value="<?php echo $fichaconsulta; ?>">
                                     </div>
@@ -447,7 +447,7 @@ $total_client = mysqli_num_rows($queryData);
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <input type="submit" class="btn btn-primary" name="editar" value="Editar"></input>
+                                        <input type="submit" class="btn btn-primary" name="editar" id="btn_editar" value="Editar"></input>
                                     </div>
                                 </form>
                                 
@@ -557,11 +557,35 @@ $total_client = mysqli_num_rows($queryData);
             } );
             
         } );
+
+        // $("#btn_agregar").click(function(){
+        //     var recolec = $('#insertar_resultado').serialize();
+        //     $.ajax({
+        //         url: '',
+        //         type: 'POST',
+        //         data: recolec,
+
+        //         success:function(vs){
+        //             alert(vs);
+        //         }
+
+        //     })
+        // });
+        // $("#btn_editar").click(function(){
+        //     var recolec = $('#actualizar').serialize();
+        //     $.ajax({
+        //         url: '',
+        //         type: 'POST',
+        //         data: recolec,
+
+        //         success:function(vs){
+        //             alert(vs);
+        //         }
+        //     })
+        // });
     </script>
 
-    <script>
-        ("#")
-    </script>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

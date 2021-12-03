@@ -17,6 +17,8 @@
 
     if (mysqli_query($con, $resultado))
         {
+            echo "<script language='JavaScript'>alert('Grabacion Correcta');</script>"; 
+
             header("Location: seguimiento.php");
         }
     else{

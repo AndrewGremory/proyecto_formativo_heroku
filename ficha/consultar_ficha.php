@@ -99,14 +99,11 @@ $miconexion=conectar_bd('root','login');
                         </div>
 
 
-                        <a class="nav-link" href="charts.html">
+                        <a class="nav-link" href="../estadisticas/index.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Estadisticas
                         </a>
-                        <a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Tablas
-                        </a>
+                       
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
@@ -151,7 +148,7 @@ $miconexion=conectar_bd('root','login');
                                 ?>
                                 <tr>
 
-                                <td><form action="seguimiento.php" method="post"><input type="submit" collapse id="ficha" class="btn btn-light" name="ficha" value="<?php echo $row['id_ficha']; ?>"/></td>
+                                <td><form action="seguimiento.php" method="post"><input type="submit" collapse hidden id="ficha" class="btn btn-light" name="ficha" value="<?php echo $row['id_ficha']; ?>"/><?php echo $row['id_ficha']; ?></td>
                                     <td><?php echo $row["tipo_programa"]; ?></td>
                                     <td><?php echo $row["pro_nombre"]; ?></td>
                                     <td><?php echo $row['lider']; ?></td>
@@ -189,14 +186,14 @@ $miconexion=conectar_bd('root','login');
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="small mb-1" for="numeroFicha">Número ficha</label>
-                                            <input class="form-control" name="id" max="6" id="id" type="text" placeholder="Ingrese número de ficha"  />
+                                            <input class="form-control" name="id"  id="id" type="text" placeholder="Ingrese número de ficha"  />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="small mb-1" for="TipoPrograma">Tipo de programa</label>
                                             <select class="form-control" name="tipo_programa" id="TipoPrograma" required>
-                                                <option disabled selected>Selecciona una opción</option>
+                                                <option disabled selected value="">Selecciona una opción</option>
                                                 <option value="1">Especialización Tecnológica</option>
                                                 <option value="2">Tecnólogo	</option>
                                                 <option value="3">Técnico</option>
