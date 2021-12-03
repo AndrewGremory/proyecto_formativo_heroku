@@ -6,10 +6,10 @@
         private $basedatos;
         public $conexion;
         public function __construct(){
-            $this->servidor = "localhost";
-            $this->usuario = "root";
-            $this->contrasena = "";
-            $this->basedatos = "login";
+            $this->servidor = "bxec8kf0gltlhhsgngsn-mysql.services.clever-cloud.com";
+            $this->usuario = "ublssitbvwxpxjcf";
+            $this->contrasena = "yWFy3KRFzjNXbOzHXFQX";
+            $this->basedatos = "bxec8kf0gltlhhsgngsn";
         }
         function conectar(){
             $this->conexion = new mysqli($this->servidor,$this->usuario,$this->contrasena,

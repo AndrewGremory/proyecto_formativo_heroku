@@ -5,7 +5,7 @@ include('funciones.php');
     
 
 
-    $miconexion=conectar_bd('', 'login');
+    $miconexion=conectar_bd('yWFy3KRFzjNXbOzHXFQX', 'bxec8kf0gltlhhsgngsn');
     $resultado=consulta($miconexion, "INSERT into programa  values (NULL, '{$nombre}') ");
     if ($resultado)
         {

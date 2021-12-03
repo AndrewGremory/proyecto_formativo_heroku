@@ -1,7 +1,7 @@
 <?php 
     function conectar_bd($clave,$basedatos)
     {
-        $conexion = new mysqli('localhost', 'root', '', 'login');
+        $conexion = new mysqli('bxec8kf0gltlhhsgngsn-mysql.services.clever-cloud.com', 'ublssitbvwxpxjcf', 'yWFy3KRFzjNXbOzHXFQX', 'bxec8kf0gltlhhsgngsn');
 
         if ($conexion->connect_error)
         {

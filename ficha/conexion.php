@@ -7,7 +7,7 @@
     $nombreprograma = $_POST['nombre_programa'];
     $liderficha = $_POST['lider_ficha'];
     
-    $miconexion=conectar_bd('', 'login');
+    $miconexion=conectar_bd('yWFy3KRFzjNXbOzHXFQX', 'bxec8kf0gltlhhsgngsn');
     $resultado=consulta($miconexion, "INSERT INTO fichas VALUES ('$ficha', '{$tipoprograma}', '{$nombreprograma}', '{$liderficha}')");
 
     // $resultado = "INSERT INTO fichas (id_ficha, tipo_programa, nombre_programa, lider_ficha, ) VALUES ('{$ficha}', '{$tipoprograma}', '{$nombreprograma}', '{$liderficha}')";

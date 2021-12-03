@@ -1,6 +1,6 @@
 <?php 
     include('funciones.php');
-    $miconexion=conectar_bd('root','login');
+    $miconexion=conectar_bd('ublssitbvwxpxjcf','bxec8kf0gltlhhsgngsn');
 ?>
 <!DOCTYPE html>
 <html lang="es">

@@ -1,5 +1,5 @@
 <?php
-$con2 = mysqli_connect('localhost', 'root', '', 'login') or die (mysqli_error($mysqli));
+$con2 = mysqli_connect('bxec8kf0gltlhhsgngsn-mysql.services.clever-cloud.com', 'ublssitbvwxpxjcf', 'yWFy3KRFzjNXbOzHXFQX', 'bxec8kf0gltlhhsgngsn') or die (mysqli_error($mysqli));
 
 $id =$_POST["id"];
 $tipo = $_POST["tipo_programa"];

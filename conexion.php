@@ -1,6 +1,6 @@
 <?php 
 
-    $conexion = mysqli_connect('localhost', 'root', '', 'login') or die (mysqli_error($mysqli));
+    $conexion = mysqli_connect('bxec8kf0gltlhhsgngsn-mysql.services.clever-cloud.com', 'ublssitbvwxpxjcf', 'yWFy3KRFzjNXbOzHXFQX', 'bxec8kf0gltlhhsgngsn') or die (mysqli_error($mysqli));
     
     
     insertar($conexion);
@@ -21,7 +21,7 @@
 
     function conectar_bd($clave,$basedatos)
     {
-        $conexion = new mysqli('localhost', 'root', 'root', 'login');
+        $conexion = new mysqli('bxec8kf0gltlhhsgngsn-mysql.services.clever-cloud.com', 'ublssitbvwxpxjcf', 'yWFy3KRFzjNXbOzHXFQX', 'bxec8kf0gltlhhsgngsn');
 
         if ($conexion->connect_error)
         {
