@@ -7,7 +7,7 @@ $_SESSION['usuario']=$usuario;
 // include('conexion.php');
 
 // $conexion = new mysqli('localhost', 'root', '', 'login');
-$conexion=mysqli_connect("localhost", "root", "", "login");
+$conexion=mysqli_connect("bxec8kf0gltlhhsgngsn-mysql.services.clever-cloud.com", "ublssitbvwxpxjcf", "yWFy3KRFzjNXbOzHXFQX", "bxec8kf0gltlhhsgngsn");
 $consulta="SELECT * FROM usuarios where usuario ='$usuario' and pw='$contraseña'";
 $resultado=mysqli_query($conexion, $consulta);
 
